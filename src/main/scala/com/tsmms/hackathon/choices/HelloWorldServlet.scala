@@ -1,4 +1,4 @@
-package net.stoerr.gappenginescalatemplate
+package com.tsmms.hackathon.choices
 
 import java.util.logging.Logger
 import javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}

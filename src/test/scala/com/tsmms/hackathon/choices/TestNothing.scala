@@ -1,4 +1,4 @@
-package net.stoerr.gappenginescalatemplate
+package com.tsmms.hackathon.choices
 
 import org.scalatest.FlatSpec
 

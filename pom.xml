@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.stoerr</groupId>
-    <artifactId>GoogleAppengineScalaTemplate</artifactId>
+    <groupId>com.tsmms.hackathon</groupId>
+    <artifactId>Choices</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <description></description>

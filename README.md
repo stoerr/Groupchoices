@@ -1,7 +1,8 @@
-Google Appengine template with Scala
-====================================
+Choices
+=======
 
-This is a template to quickly start a project with google appengine.
+(TODO: Description)
+
 
 To run locally, build with
 mvn clean install
@@ -13,4 +14,3 @@ Some other stuff:
 
 https://cloud.google.com/appengine/docs/java/tools/maven :
 mvn help:describe -DgroupId=com.google.appengine -DartifactId=appengine-maven-plugin -Ddetail=true
-

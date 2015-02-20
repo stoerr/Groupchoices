@@ -6,7 +6,7 @@
     <description>Guesses Grok patterns from a number of loglines</description>
     <servlet>
         <servlet-name>helloworld</servlet-name>
-        <servlet-class>net.stoerr.gappenginescalatemplate.HelloWorldServlet</servlet-class>
+        <servlet-class>HelloWorldServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
