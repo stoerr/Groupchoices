@@ -7,6 +7,7 @@ Terms
 =====
 
 choice: a number of items the group has to select from
+
 vote: a number of ratings for all items of a choice
 
 Rough URL design
@@ -15,9 +16,9 @@ Rough URL design
 uvw, xyz and lmn are random numbers encoded base64.
 
 - /
-    GET : Description . Links to /new
+    * GET : Description . Links to /new
 - /new
-    GET : Form for creating a new choice
+    * GET : Form for creating a new choice
 - /a
     * PUT : creates choice, redirects to /a/uvw with fresh uvw
 - /a/uvw
