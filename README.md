@@ -3,6 +3,40 @@ Choices
 
 (TODO: Description)
 
+Terms
+=====
+
+choice: a number of items the group has to select from
+vote: a number of ratings for all items of a choice
+
+Rough URL design
+================
+
+uvw, xyz and lmn are random numbers encoded base64.
+
+- /
+    GET : Description . Links to /new
+- /new
+    GET : Form for creating a new choice
+- /a
+    * PUT : creates choice, redirects to /a/uvw with fresh uvw
+- /a/uvw
+    * GET : displays admin page for a choice, contains link to /c/xyz
+    * (POST : changes choice, redirects to GET /a/uvw)
+    * (DELETE : deletes choice, redirects to /)
+- /c/xyz
+    * GET : presents current answers, incl. summary(?)
+- /c/xyz/summary
+    * GET : presents summary
+- /c/xyz/v/
+    * PUT : creates new vote, redirects to /c/xyz/a/lmn with fresh lmn
+- /c/xyz/v/lmn
+    * GET : displays vote
+    * (POST : changes vote, redirects to GET itself)
+    * (DELETE : deletes vote, redirects to /c/xyz)
+
+Run
+===
 
 To run locally, build with
 mvn clean install
