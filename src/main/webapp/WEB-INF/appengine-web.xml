@@ -37,6 +37,6 @@
         </include>
     </static-files>
 
-    <sessions-enabled>false</sessions-enabled>
+    <!-- <sessions-enabled>false</sessions-enabled> -->
 
 </appengine-web-app>
