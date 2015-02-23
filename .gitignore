@@ -6,7 +6,6 @@ hotspot.log
 .gradle/
 build/
 target/
-classes/
 /var
 pom.xml.versionsBackup
 test-output/
@@ -22,20 +21,18 @@ test-output
 *~
 
 #
-*.class
 *.log
 
 # sbt specific
 dist/*
-target/
 lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
 
 #IDEA specifics
-.idea
-*.iml
 /.classpath
 /.project
 /.settings
+
+src/main/resources/rebel.xml
