@@ -5,7 +5,8 @@
     <artifactId>Choices</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <description></description>
+    <description>Web-App to support a group choice by observing detailed preferences of all members of the group
+    </description>
 
     <properties>
         <appengine.app.version>1</appengine.app.version>
@@ -117,6 +118,10 @@
                     <fullScanSeconds>1</fullScanSeconds>
                     <server>preview.appengine.google.com</server>
                     <port>9090</port>
+                    <disableUpdateCheck>true</disableUpdateCheck>
+                    <jvmFlags>
+                        <!-- <jvmFlag>-javaagent:${env.JREBEL_HOME}/jrebel.jar</jvmFlag> <jvmFlag>-noverify</jvmFlag> -->
+                    </jvmFlags>
                 </configuration>
             </plugin>
         </plugins>
