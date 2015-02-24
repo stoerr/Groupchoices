@@ -1,9 +1,9 @@
-package com.tsmms.hackathon.choices
+package com.tsmms.hackathon.choices.hello
 
 import java.util.logging.Logger
-import javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}
+import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
-import com.google.appengine.api.datastore.{Entity, Query, DatastoreServiceFactory, DatastoreService}
+import com.google.appengine.api.datastore.{DatastoreServiceFactory, Entity, Query}
 
 /**
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
@@ -19,11 +19,15 @@ class HelloWorldServlet extends HttpServlet {
     resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate") // HTTP 1.1
     resp.setHeader("Pragma", "no-cache") // HTTP 1.0
     resp.setDateHeader("Expires", 0)
-    req.setAttribute("title", "Hello world page")
-    req.setAttribute("heading", "Hello world!")
-    req.setAttribute("body", <p>We have
+    req.setAttribute("title", "Hello world!")
+    req.setAttribute("description", "This is a hello world page.")
+    req.setAttribute("mainarea", <p>We have
       {callCount}
-      calls</p>)
+      calls</p>
+      <p>
+        <a href="/hellodispatch/huhu/42?helloinput=17">Hello world dispatcher</a>
+      </p>
+    )
     getServletContext.getRequestDispatcher("/jsp/frame.jsp").forward(req, resp)
   }
 

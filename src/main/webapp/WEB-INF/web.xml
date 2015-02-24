@@ -6,12 +6,21 @@
     <description>Guesses Grok patterns from a number of loglines</description>
     <servlet>
         <servlet-name>helloworld</servlet-name>
-        <servlet-class>com.tsmms.hackathon.choices.HelloWorldServlet</servlet-class>
+        <servlet-class>com.tsmms.hackathon.choices.hello.HelloWorldServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>hellodispatcher</servlet-name>
+        <servlet-class>com.tsmms.hackathon.choices.hello.HelloDispatcher</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>helloworld</servlet-name>
         <url-pattern>/hello/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>hellodispatcher</servlet-name>
+        <url-pattern>/hellodispatch/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <!-- <session-timeout>1</session-timeout> -->

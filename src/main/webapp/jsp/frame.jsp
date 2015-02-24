@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="language" content="en" />
-<meta name="author" content="Hans-Peter St&ouml;rr, www.stoerr.net" />
+<meta name="author" content="Various" />
 <meta name="robots" content="all, index, follow" />
 <meta name="allow-search" content="yes" />
 <meta name="content-language" content="en" />
@@ -19,8 +19,8 @@
 <title><%=request.getAttribute("title")%></title>
 </head>
 <body>
-    <h1><%=request.getAttribute("heading")%></h1>
-    <%=request.getAttribute("body")%>
-    <p><a href="http://www.stoerr.net">Hans-Peter St&ouml;rr</a></p>
+    <h1><%=request.getAttribute("title")%></h1>
+    <p><%=request.getAttribute("description")%></p>
+    <%=request.getAttribute("mainarea")%>
 </body>
 </html>
