@@ -53,3 +53,5 @@ Some other stuff:
 
 https://cloud.google.com/appengine/docs/java/tools/maven :
 mvn help:describe -DgroupId=com.google.appengine -DartifactId=appengine-maven-plugin -Ddetail=true
+
+Deployed on http://groupchoices.appspot.com/
