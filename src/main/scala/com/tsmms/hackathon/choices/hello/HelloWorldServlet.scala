@@ -5,6 +5,8 @@ import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
 import com.google.appengine.api.datastore.{DatastoreServiceFactory, Entity, Query}
 
+import scala.xml.NodeSeq
+
 /**
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
  * @since 20.02.2015
@@ -20,14 +22,14 @@ class HelloWorldServlet extends HttpServlet {
     resp.setHeader("Pragma", "no-cache") // HTTP 1.0
     resp.setDateHeader("Expires", 0)
     req.setAttribute("title", "Hello world!")
-    req.setAttribute("description", "This is a hello world page.")
-    req.setAttribute("mainarea", <p>We have
+    req.setAttribute("description", "This is a hello world page!")
+    val body: NodeSeq = <p>We do have
       {callCount}
-      calls</p>
+      calls</p> ++
       <p>
         <a href="/hellodispatch/huhu/42?helloinput=17">Hello world dispatcher</a>
       </p>
-    )
+    req.setAttribute("mainarea", body)
     getServletContext.getRequestDispatcher("/jsp/frame.jsp").forward(req, resp)
   }
 
