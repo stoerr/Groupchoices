@@ -13,7 +13,7 @@ import scala.xml.NodeSeq
 class HelloDispatcher extends HttpServlet {
 
   override def doGet(request: HttpServletRequest, response: HttpServletResponse): Unit = {
-    val controller = request.getPathInfo match {
+    val controller = request.getServletPath + request.getPathInfo match {
       case HelloController.pathRegex(id) => new HelloController(id)(request)
     }
     controller.view() match {
@@ -42,8 +42,8 @@ trait WebView {
 }
 
 trait HTMLRendering {
-  def form(action: String, method: String = "POST")(nodeSeq: NodeSeq)(implicit request: HttpServletRequest): NodeSeq =
-    <form action={request.getServletPath + action} method={method}>
+  def form(action: String, method: String = "POST")(nodeSeq: NodeSeq): NodeSeq =
+    <form action={action} method={method}>
       {nodeSeq}
     </form>
 
@@ -61,7 +61,7 @@ trait HTMLRendering {
 }
 
 object HelloController {
-  val pathRegex = "/huhu/([0-9]+)".r
+  val pathRegex = "/hellodispatch/huhu/([0-9]+)".r
 }
 
 // http://localhost:9090/hellodispatch/huhu/42?helloinput=17
@@ -75,9 +75,9 @@ class HelloController(id: String)(implicit val request: HttpServletRequest) exte
 
   def title = "Hello world view"
 
-  def description = "Hello world via the controller"
+  def description = "Hello world via the controller!"
 
-  def mainarea = <p>Hoi! Ha!</p> ++ form(request.getPathInfo, "GET")(helloForm.render ++ submit("Redisplay")) ++
+  def mainarea = <p>Hoi! Ha!</p> ++ form(request.getServletPath + request.getPathInfo, "GET")(helloForm.render ++ submit("Redisplay")) ++
     table(somedata.toList.map(e => tableRow(e._1.toString, e._2.toString)))
 }
 
