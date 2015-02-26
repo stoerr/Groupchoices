@@ -144,6 +144,10 @@
                     <server>preview.appengine.google.com</server>
                     <port>9090</port>
                     <disableUpdateCheck>true</disableUpdateCheck>
+                    <jvmFlags>
+                        <jvmFlag>-Xdebug</jvmFlag>
+                        <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
+                    </jvmFlags>
                 </configuration>
             </plugin>
         </plugins>
@@ -158,6 +162,8 @@
                         <artifactId>appengine-maven-plugin</artifactId>
                         <configuration>
                             <jvmFlags>
+                                <jvmFlag>-Xdebug</jvmFlag>
+                                <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
                                 <jvmFlag>-javaagent:${env.JREBEL_HOME}/jrebel.jar
                                 </jvmFlag>
                                 <jvmFlag>-noverify</jvmFlag>
