@@ -55,3 +55,18 @@ https://cloud.google.com/appengine/docs/java/tools/maven :
 mvn help:describe -DgroupId=com.google.appengine -DartifactId=appengine-maven-plugin -Ddetail=true
 
 Deployed on http://groupchoices.appspot.com/
+
+Resources
+=========
+https://cloud.google.com/appengine/docs/java/datastore/entities
+https://cloud.google.com/appengine/docs/java/tools/localunittesting
+
+http://www.scalatest.org/user_guide
+http://doc.scalatest.org/2.2.4/index.html#package
+http://www.scala-lang.org/api/current/index.html
+
+https://wicket.apache.org/
+https://wicket.apache.org/guide/guide/single.html
+http://www.wicket-library.com/wicket-examples/compref/
+http://ci.apache.org/projects/wicket/apidocs/6.x/
+
