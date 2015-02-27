@@ -1,9 +1,9 @@
 package com.tsmms.hackathon.choices
 
-import com.google.appengine.api.datastore.KeyFactory
+import com.google.appengine.api.datastore._
 import com.google.appengine.tools.development.testing.{LocalDatastoreServiceTestConfig, LocalServiceTestHelper}
-import org.scalatest.{BeforeAndAfter, FlatSpec}
 import com.tsmms.hackathon.choices.PollDao._
+import org.scalatest.{BeforeAndAfter, FlatSpec}
 
 /**
  * Tries saving and reading something from the datastore.
@@ -22,14 +22,21 @@ class TestPollDao extends FlatSpec with BeforeAndAfter {
     helper.tearDown()
   }
 
-  "PollDao" should "save and retrieve DsSaveEntities" in {
+  val testpoll = Poll(id = None, adminId = "alskdjasd", name = "the name", description = "laber ga gum go",
+    choices = List(Choice("hu", "ha"), Choice("foo", "bar")),
+    votes = List(
+      Vote("firstuser", ratings = List(Rating("hu", 7), Rating("ha", 4))),
+      Vote("seconduser", ratings = List(Rating("hu", 2), Rating("ha", 8)))
+    ))
 
-    val testpoll = Poll(id = None, adminId = "alskdjasd", name = "the name", description = "laber ga gum go",
-      choices = List(Choice("hu", "ha"), Choice("foo", "bar")),
-      votes = List(
-        Vote("firstuser", ratings = List(Rating("hu", 7), Rating("ha", 4))),
-        Vote("seconduser", ratings = List(Rating("hu", 2), Rating("ha", 8)))
-      ))
+  "Poll" should "transform to entities and back" in {
+    val entity = new Entity(pollEntityName, 42L)
+    testpoll.copyToEntity(entity)
+    val readback: Poll = new Poll(entity)
+    assert(testpoll.copy(id = Some(42)) == readback)
+  }
+
+  "PollDao" should "save and retrieve DsSaveEntities" in {
 
     val savedpoll = saveOrUpdate(testpoll)
     assert(null != savedpoll.id)

@@ -2,7 +2,6 @@ package com.tsmms.hackathon.choices
 
 import com.google.appengine.api.datastore.{EmbeddedEntity, Entity, PropertyContainer}
 import com.tsmms.hackathon.choices.DataStoreStorable._
-import scala.collection.JavaConversions._
 
 /** Contains all data about a poll - incl. answers by all users. Stored as one entity since google has quotas
   * on free datastore accesses. :-) */
@@ -19,8 +18,8 @@ case class Poll(
     container.setProperty("adminId", adminId)
     container.setUnindexedProperty("name", name)
     container.setUnindexedProperty("description", description)
-    container.setUnindexedProperty("choices", asJavaCollection(choices map (_.toEmbeddedEntity)))
-    container.setUnindexedProperty("votes", asJavaCollection(votes map (_.toEmbeddedEntity)))
+    container.setUnindexedProperty("choices", listToEmbeddedEntity(choices map (_.toEmbeddedEntity)))
+    container.setUnindexedProperty("votes", listToEmbeddedEntity(votes map (_.toEmbeddedEntity)))
   }
 
   def this(entity: Entity) =
@@ -50,7 +49,7 @@ case class Vote(
                  ) extends DataStoreStorable {
   def copyToEntity(container: PropertyContainer) = {
     container.setProperty("id", id)
-    container.setProperty("ratings", asJavaCollection(ratings map (_.toEmbeddedEntity)))
+    container.setProperty("ratings", listToEmbeddedEntity(ratings map (_.toEmbeddedEntity)))
   }
 
   def this(entity: EmbeddedEntity) = this(id = entity.getProperty("id").asInstanceOf[String],

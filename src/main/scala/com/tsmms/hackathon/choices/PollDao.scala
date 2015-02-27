@@ -3,6 +3,8 @@ package com.tsmms.hackathon.choices
 import com.google.appengine.api.datastore.Query.{FilterOperator, FilterPredicate}
 import com.google.appengine.api.datastore._
 
+import scala.collection.JavaConversions._
+
 /** Provides some functionality to store in google datastore. This should work per annotations or reflection or
   * JPA or whatnot, but for now we just to it by hand.
   * We put that into the domain classes directly, so that we can't forget it when an attribute is added. */
@@ -15,11 +17,24 @@ trait DataStoreStorable {
     embeddedEntity
   }
 
+  /** Abuse of embedded entities as list: we have properties item number with the actual values */
+  def listToEmbeddedEntity[T](values: List[T]): EmbeddedEntity = {
+    val entity = new EmbeddedEntity
+    values.zipWithIndex.map { case (value, idx) =>
+      entity.setProperty(idx.toString, value)
+    }
+    entity
+  }
 }
 
 object DataStoreStorable {
-  def readEmbeddedList[T](entity: PropertyContainer, propertyName: String, constructor: EmbeddedEntity => T) =
-    entity.getProperty("propertyName").asInstanceOf[List[EmbeddedEntity]] map constructor
+  def readEmbeddedList[T](entity: PropertyContainer, propertyName: String, constructor: EmbeddedEntity => T): List[T]
+  = {
+    val thelistAsEntity = entity.getProperty(propertyName).asInstanceOf[EmbeddedEntity]
+    thelistAsEntity.getProperties.toArray map { case (key, value) =>
+      (key.toInt, value.asInstanceOf[EmbeddedEntity])
+    } sortBy (_._1) map (_._2) map constructor toList
+  }
 }
 
 /**
@@ -36,7 +51,8 @@ object PollDao {
 
   /** Saves object and returns it with initialized key. */
   def saveOrUpdate(obj: Poll): Poll = {
-    val entity = if (obj.id.isEmpty) new Entity(pollEntityName) else ds.get(KeyFactory.createKey(pollEntityName, obj
+    val entity = if (obj.id.isEmpty) new Entity(pollEntityName)
+    else ds.get(KeyFactory.createKey(pollEntityName, obj
       .id.get))
     obj.copyToEntity(entity)
     val savedKey = ds.put(entity)
