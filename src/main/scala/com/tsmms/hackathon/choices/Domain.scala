@@ -1,54 +1,60 @@
-import com.google.appengine.api.datastore.{EmbeddedEntity, Key, PropertyContainer}
+package com.tsmms.hackathon.choices
 
-/** Provides some functionality to store in google datastore. This should work per annotations or reflection or
-  * JPA or whatnot, but for now we just to it by hand.
-  * We put that into the domain classes directly, so that we can't forget it when an attribute is added. */
-trait Storable {
-  def copyToEntity(container: PropertyContainer)
+import com.google.appengine.api.datastore.{EmbeddedEntity, Entity, PropertyContainer}
+import com.tsmms.hackathon.choices.DataStoreStorable._
+import scala.collection.JavaConversions._
 
-  def toEmbeddedEntity = {
-    val embeddedEntity = new EmbeddedEntity
-    copyToEntity(embeddedEntity)
-    embeddedEntity
-  }
-}
-
+/** Contains all data about a poll - incl. answers by all users. Stored as one entity since google has quotas
+  * on free datastore accesses. :-) */
 case class Poll(
-                 id: Key,
+                 id: Option[Long],
                  adminId: String,
                  name: String,
                  description: String,
                  choices: List[Choice],
                  votes: List[Vote]
-                 ) extends Storable {
+                 ) extends DataStoreStorable {
   def copyToEntity(container: PropertyContainer) = {
     // for now "by hand" , TODO: replace by some sensible way (reflection etc.)
     container.setProperty("adminId", adminId)
     container.setUnindexedProperty("name", name)
     container.setUnindexedProperty("description", description)
-    container.setUnindexedProperty("choices", choices map (_.toEmbeddedEntity))
-    container.setUnindexedProperty("votes", votes map (_.toEmbeddedEntity))
+    container.setUnindexedProperty("choices", asJavaCollection(choices map (_.toEmbeddedEntity)))
+    container.setUnindexedProperty("votes", asJavaCollection(votes map (_.toEmbeddedEntity)))
   }
+
+  def this(entity: Entity) =
+    this(id = Some(entity.getKey.getId), adminId = entity.getProperty("adminId").asInstanceOf[String],
+      name = entity.getProperty("name").asInstanceOf[String], description = entity.getProperty("description")
+        .asInstanceOf[String],
+      choices = readEmbeddedList(entity, "choices", new Choice(_)), votes = readEmbeddedList(entity, "votes", new
+          Vote(_)))
 }
 
 case class Choice(
                    id: String,
                    name: String
-                   ) extends Storable {
+                   ) extends DataStoreStorable {
   def copyToEntity(container: PropertyContainer) = {
     container.setProperty("id", id)
     container.setProperty("name", name)
   }
+
+  def this(entity: EmbeddedEntity) = this(id = entity.getProperty("id").asInstanceOf[String], name = entity
+    .getProperty("name").asInstanceOf[String])
 }
 
 case class Vote(
                  id: String,
                  ratings: List[Rating]
-                 ) extends Storable {
+                 ) extends DataStoreStorable {
   def copyToEntity(container: PropertyContainer) = {
     container.setProperty("id", id)
-    container.setProperty("ratings", ratings map (_.toEmbeddedEntity))
+    container.setProperty("ratings", asJavaCollection(ratings map (_.toEmbeddedEntity)))
   }
+
+  def this(entity: EmbeddedEntity) = this(id = entity.getProperty("id").asInstanceOf[String],
+    ratings = readEmbeddedList(entity, "ratings", new Rating(_)))
 }
 
 case class Rating(
@@ -57,9 +63,12 @@ case class Rating(
                    /** Rating between 0-9 */
                    rating: Int
                    )
-  extends Storable {
+  extends DataStoreStorable {
   def copyToEntity(container: PropertyContainer) = {
     container.setProperty("choiceId", choiceId)
     container.setProperty("rating", rating)
   }
+
+  def this(entity: EmbeddedEntity) = this(choiceId = entity.getProperty("choiceId").asInstanceOf[String], entity
+    .getProperty("rating").asInstanceOf[Number].intValue())
 }
