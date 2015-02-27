@@ -1,7 +1,7 @@
 package com.tsmms.hackathon.choices
 
 object PollOverviewController {
-  def path(id: String) = "/a/" + id
+  def path(id: Long) = "/a/" + ChoiceDispatcher.encodeId(id)
 
   val pathRegex = "/a/([0-9a-z]+)".r
 }

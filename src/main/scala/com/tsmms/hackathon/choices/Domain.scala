@@ -10,8 +10,8 @@ case class Poll(
                  adminId: String,
                  name: String,
                  description: String,
-                 choices: List[Choice],
-                 votes: List[Vote]
+                 choices: List[Choice] = List.empty,
+                 votes: List[Vote] = List.empty
                  ) extends DataStoreStorable {
   def copyToEntity(container: PropertyContainer) = {
     // for now "by hand" , TODO: replace by some sensible way (reflection etc.)
