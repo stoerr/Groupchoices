@@ -48,6 +48,9 @@ class TestPollDao extends FlatSpec with BeforeAndAfter {
     val changedPoll = savedpoll.copy(description = "Yo!")
     val changedSaved = saveOrUpdate(changedPoll)
     assert(Some(changedPoll) == get(changedPoll.id.get))
+
+    assert(Some(changedPoll) == findByAdminId(testpoll.adminId))
+    assert(None == findByAdminId("whatever"))
   }
 
 }
