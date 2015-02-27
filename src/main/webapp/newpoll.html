@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Poll - New Poll</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/theme.css" rel="stylesheet">
+</head>
+
+<body role="document">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Poll</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="page-header">
+        <h1>Create a new poll</h1>
+    </div>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputName" placeholder="Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDescription" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="5" id="inputDescription" placeholder="Enter the poll description here"></textarea>
+            </div>
+        </div>
+        <div class="choicepanel panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="choice1" class="col-sm-2 control-label">Choice 1</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice1" placeholder="Choice 1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice2" class="col-sm-2 control-label">Choice 2</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice2" placeholder="Choice 2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice3" class="col-sm-2 control-label">Choice 3</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice3" placeholder="Choice 3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice4" class="col-sm-2 control-label">Choice 4</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice4" placeholder="Choice 4">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-1">
+                <button type="submit" class="btn btn-default">Abort</button>
+            </div>
+            <div class="col-sm-9">
+                <button type="submit" class="btn btn-primary">Create Poll</button>
+            </div>
+        </div>
+    </form>
+
+</div><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
