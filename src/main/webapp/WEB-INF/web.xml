@@ -5,14 +5,19 @@
     <display-name>Choices</display-name>
     <description>Web-App to support a group choice by observing detailed preferences of all members of the group</description>
     <servlet>
+        <servlet-name>choicedispatcher</servlet-name>
+        <servlet-class>com.tsmms.hackathon.choices.ChoiceDispatcher</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
         <servlet-name>helloworld</servlet-name>
         <servlet-class>com.tsmms.hackathon.choices.hello.HelloWorldServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>hellodispatcher</servlet-name>
         <servlet-class>com.tsmms.hackathon.choices.hello.HelloDispatcher</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>0</load-on-startup>
     </servlet>
     <filter>
         <filter-name>wicket.filter</filter-name>
@@ -30,6 +35,12 @@
             <param-value>development</param-value>
         </init-param>
     </filter>
+    <servlet-mapping>
+        <servlet-name>choicedispatcher</servlet-name>
+        <url-pattern>/new</url-pattern>
+        <url-pattern>/a/*</url-pattern>
+        <url-pattern>/c/*</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>helloworld</servlet-name>
         <url-pattern>/hello/*</url-pattern>
