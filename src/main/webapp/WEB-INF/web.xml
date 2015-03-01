@@ -10,6 +10,11 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
+        <servlet-name>minichoicedispatcher</servlet-name>
+        <servlet-class>com.tsmms.hackathon.choices.minimal.MChoiceController</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet>
         <servlet-name>helloworld</servlet-name>
         <servlet-class>com.tsmms.hackathon.choices.hello.HelloWorldServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
@@ -28,7 +33,7 @@
         </init-param>
         <init-param>
             <param-name>ignorePaths</param-name>
-            <param-value>css/,img/,js/,/hellodispatch/,/hello/</param-value>
+            <param-value>css/,img/,js/,/hellodispatch/,/hello/,/mini/</param-value>
         </init-param>
         <init-param>
             <param-name>configuration</param-name>
@@ -40,6 +45,10 @@
         <url-pattern>/new</url-pattern>
         <url-pattern>/a/*</url-pattern>
         <url-pattern>/c/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>minichoicedispatcher</servlet-name>
+        <url-pattern>/mini/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>helloworld</servlet-name>
