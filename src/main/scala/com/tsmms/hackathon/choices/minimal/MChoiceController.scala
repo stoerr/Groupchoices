@@ -27,7 +27,7 @@ object MChoiceController {
 
   val pathAnswerPollRegex = "/c/(-?[0-9a-z]+)/new".r
 
-  def pathSaveAnswerToPoll(id: Long) = "/c/" + encodeId(id) + "/new"
+  def pathSaveAnswerToPoll(id: Long) = "/c/" + encodeId(id) + "/v"
 
   val pathSaveAnswerToPollRegex = "/c/(-?[0-9a-z]+)/v".r
 
@@ -76,6 +76,9 @@ abstract class MController(implicit val request: HttpServletRequest) {
 
   def param(name: String) = requestParameters(name)
 
+  def choiceParams = requestParameters.filterKeys(_.startsWith("choice")).filterNot(_._2.trim.isEmpty)
+    .toArray.sortBy(_._1).map(p => p._2).toList
+
   def htmlPage(title: String, main: NodeSeq) = <html>
     <head>
       <title>
@@ -120,17 +123,14 @@ abstract class MController(implicit val request: HttpServletRequest) {
 class NewPoll(implicit request: HttpServletRequest) extends MController {
   override def view() = Right(htmlPage("Create a new poll", form(pathCreatePoll,
     textInput("name", "Name") ++ textInput("description", "Description") ++ textInput("choice1", "Choice 1") ++
-      textInput("choice2", "Choice 2") ++ textInput("choic3", "Choice 3") ++ textInput("choice4", "Choice 4") ++
+      textInput("choice2", "Choice 2") ++ textInput("choice3", "Choice 3") ++ textInput("choice4", "Choice 4") ++
       submit("submit", "Submit")
   )))
 }
 
 class CreatePoll(implicit request: HttpServletRequest) extends MController {
-  val choices = requestParameters.filterKeys(_.startsWith("choice")).toArray.sortBy(_._1).map(p => MChoice(p._2))
-  val poll = MPollDao.saveOrUpdate(MPoll(name = param("name"), description = param("description"), choices = choices
-    .toList))
-  println(poll)
-  println(MPollDao.get(poll.id.get))
+  val poll = MPollDao.saveOrUpdate(MPoll(name = param("name"), description = param("description"),
+    choices = choiceParams.toList))
 
   override def view() = Left(pathViewPoll(poll.id.get))
 }
@@ -140,9 +140,9 @@ class ViewPoll(id: Long)(implicit request: HttpServletRequest) extends MControll
 
   override def view() = Right(htmlPage("Poll " + poll.name, <p>
     {poll.description}
-  </p> ++ <a href={request.getServletPath + pathAnswerPoll(poll.id.get)}>Create new answer</a> ++ table(List
-    ("Choice"), poll.choices.map(n =>
-    List(n.name)))))
+  </p> ++ <a href={request.getServletPath + pathAnswerPoll(poll.id.get)}>Create new answer</a> ++
+    table("Choice" :: poll.votes.map(_.username), poll.choices.map(n =>
+      List(n)))))
 }
 
 class AnswerPoll(id: Long)(implicit request: HttpServletRequest) extends MController {
@@ -150,13 +150,17 @@ class AnswerPoll(id: Long)(implicit request: HttpServletRequest) extends MContro
 
   override def view() = Right(htmlPage("Answer poll " + poll.name, <p>
     {poll.description}
-  </p> ++ form(pathSaveAnswerToPoll(poll.id.get), poll.choices.zipWithIndex.map { case (choice, i) =>
-    textInput("choice" + i, choice.name)
-  })))
+  </p> ++ form(pathSaveAnswerToPoll(poll.id.get), textInput("name", "Username") ++
+    poll.choices.zipWithIndex.map { case (choice, i) =>
+      textInput("choice" + i, choice)
+    } ++ submit("submit", "Submit"))))
 }
 
 class SaveAnswerToPoll(id: Long)(implicit request: HttpServletRequest) extends MController {
   val poll = MPollDao.get(id).get
+  val vote = MVote(param("name"), choiceParams.map(_.toInt))
+  val savedPoll = MPollDao.saveOrUpdate(poll.copy(votes = vote :: poll.votes))
+  println(savedPoll)
 
   override def view() = Left(pathViewPoll(poll.id.get))
 }

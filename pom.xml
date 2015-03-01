@@ -36,9 +36,9 @@
             <version>2.11.0-M4</version>
         </dependency>
         <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-pickling_2.11</artifactId>
-            <version>0.9.1</version>
+            <groupId>org.json4s</groupId>
+            <artifactId>json4s-native_2.11</artifactId>
+            <version>3.2.11</version>
         </dependency>
 
         <dependency>
