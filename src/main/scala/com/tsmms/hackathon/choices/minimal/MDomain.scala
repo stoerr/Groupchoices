@@ -3,8 +3,6 @@ package com.tsmms.hackathon.choices.minimal
 import com.google.appengine.api.datastore.Query.{FilterOperator, FilterPredicate}
 import com.google.appengine.api.datastore._
 
-import scala.util.Random
-
 /** Contains all data about a poll - incl. answers by all users. */
 case class MPoll(
                   name: String,
@@ -16,18 +14,15 @@ case class MPoll(
                   )
 
 case class MChoice(
-                    id: String,
                     name: String
                     )
 
 case class MVote(
-                  id: String,
+                  username: String,
                   ratings: List[MRating]
                   )
 
 case class MRating(
-                    choiceId: String,
-
                     /** Rating between 0-9 */
                     rating: Int
                     )

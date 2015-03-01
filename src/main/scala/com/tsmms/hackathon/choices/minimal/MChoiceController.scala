@@ -126,8 +126,7 @@ class NewPoll(implicit request: HttpServletRequest) extends MController {
 }
 
 class CreatePoll(implicit request: HttpServletRequest) extends MController {
-  val choices = requestParameters.filterKeys(_.startsWith("choice")).toArray.sortBy(_._1).map(p => MChoice
-    (MChoiceController.makeStringId, p._2))
+  val choices = requestParameters.filterKeys(_.startsWith("choice")).toArray.sortBy(_._1).map(p => MChoice(p._2))
   val poll = MPollDao.saveOrUpdate(MPoll(name = param("name"), description = param("description"), choices = choices
     .toList))
   println(poll)
@@ -152,7 +151,7 @@ class AnswerPoll(id: Long)(implicit request: HttpServletRequest) extends MContro
   override def view() = Right(htmlPage("Answer poll " + poll.name, <p>
     {poll.description}
   </p> ++ form(pathSaveAnswerToPoll(poll.id.get), poll.choices.zipWithIndex.map { case (choice, i) =>
-    textInput(choice.id, choice.name)
+    textInput("choice" + i, choice.name)
   })))
 }
 
