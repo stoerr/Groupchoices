@@ -142,10 +142,18 @@ class ViewPoll(id: Long)(implicit request: HttpServletRequest) extends MControll
     {poll.description}
   </p> ++ <a href={request.getServletPath + pathAnswerPoll(poll.id.get)}>Create new answer</a> ++
     table("Choice" :: poll.votes.map(_.username), pollTableData(poll.choices, poll.votes.map(_.ratings.map(_
-      .toString))))))
+      .toString)))) ++
+    table(List("Choice", "Avg. rating"), pollSummaryData(poll.choices, poll.votes.map(_.ratings))
+    )))
 
   def pollTableData(choices: List[String], votes: List[List[String]]): List[List[String]] = choices match {
     case choice :: restChoices => (choice :: votes.map(_.head)) :: pollTableData(restChoices, votes.map(_.tail))
+    case empty => List.empty
+  }
+
+  def pollSummaryData(choices: List[String], votes: List[List[Int]]): List[List[String]] = choices match {
+    case choice :: restChoices => List(choice, votes.map(_.head / votes.size).sum.toString) ::
+      pollSummaryData(restChoices, votes.map(_.tail))
     case empty => List.empty
   }
 }
