@@ -141,8 +141,13 @@ class ViewPoll(id: Long)(implicit request: HttpServletRequest) extends MControll
   override def view() = Right(htmlPage("Poll " + poll.name, <p>
     {poll.description}
   </p> ++ <a href={request.getServletPath + pathAnswerPoll(poll.id.get)}>Create new answer</a> ++
-    table("Choice" :: poll.votes.map(_.username), poll.choices.map(n =>
-      List(n)))))
+    table("Choice" :: poll.votes.map(_.username), pollTableData(poll.choices, poll.votes.map(_.ratings.map(_
+      .toString))))))
+
+  def pollTableData(choices: List[String], votes: List[List[String]]): List[List[String]] = choices match {
+    case choice :: restChoices => (choice :: votes.map(_.head)) :: pollTableData(restChoices, votes.map(_.tail))
+    case empty => List.empty
+  }
 }
 
 class AnswerPoll(id: Long)(implicit request: HttpServletRequest) extends MController {
