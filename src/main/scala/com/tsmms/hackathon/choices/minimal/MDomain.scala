@@ -44,13 +44,13 @@ object MPollDao {
   def saveOrUpdate(poll: MPoll): MPoll = {
     val entity = if (poll.id.isDefined) new Entity(pollEntityName, poll.id.get) else new Entity(pollEntityName)
     entity.setProperty("adminId", poll.adminId)
-    entity.setProperty("pickled", poll.pickle.value)
+    entity.setUnindexedProperty("pickled", new Text(poll.pickle.value))
     val key = ds.put(entity)
     poll.copy(id = Some(key.getId))
   }
 
   private def decode(entity: Entity): MPoll =
-    entity.getProperty("pickled").asInstanceOf[String].unpickle[MPoll].copy(id = Some(entity.getKey.getId))
+    entity.getProperty("pickled").asInstanceOf[Text].getValue.unpickle[MPoll].copy(id = Some(entity.getKey.getId))
 
   def get(id: Long): Option[MPoll] = {
     try {
