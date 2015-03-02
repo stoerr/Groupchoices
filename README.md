@@ -1,16 +1,27 @@
 Choices
 =======
 
-(TODO: Description)
+Supports choice making for a group by allowing all members of a group to specify
+ratings for all possible choices. The idea is to extend that later by different types
+of ratings and different algorithms to find the best choices: specify 0-9 or one to five star
+ratings per item, specify a order of preference between them, ...
 
 Terms
 =====
 
-choice: a number of items the group has to select from
-
-vote: a number of ratings for all items of a choice
-
+poll: a number of items (choices) the group has to select from
+choice: one possibility to choose
+vote: a number of ratings by one group member (user) for all choices
 result: presents the best choice(s) for the group.
+
+Code
+====
+
+In com.tsmms.hackathon.choices.prototype there is very quick a prototype (3 man hours)
+with some very basic functionality that actually works. Might cause eye cancer and has no
+documentation - kind of write only code.
+
+There is some more code for a full version, but that's not working yet.
 
 Rough URL design
 ================

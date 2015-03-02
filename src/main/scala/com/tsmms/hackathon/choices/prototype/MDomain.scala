@@ -1,17 +1,14 @@
-package com.tsmms.hackathon.choices.minimal
+package com.tsmms.hackathon.choices.prototype
 
-import com.google.appengine.api.datastore.Query.{FilterOperator, FilterPredicate}
 import com.google.appengine.api.datastore._
-import org.json4s.native.Serialization
 
-/** Contains all data about a poll - incl. answers by all users. */
+/** Minimal data model for a prototype. Contains all data about a poll - incl. answers by all users. */
 case class MPoll(
                   name: String,
                   description: String,
                   choices: List[String] = List.empty,
                   votes: List[MVote] = List.empty,
-                  id: Option[Long] = None,
-                  adminId: String = MChoiceController.makeStringId
+                  id: Option[Long] = None
                   )
 
 case class MVote(
@@ -35,7 +32,6 @@ object MPollDao {
 
   def saveOrUpdate(poll: MPoll): MPoll = {
     val entity = if (poll.id.isDefined) new Entity(pollEntityName, poll.id.get) else new Entity(pollEntityName)
-    entity.setProperty("adminId", poll.adminId)
     entity.setUnindexedProperty("pickled", new Text(write(poll)))
     val key = ds.put(entity)
     poll.copy(id = Some(key.getId))
@@ -51,12 +47,6 @@ object MPollDao {
     } catch {
       case _: EntityNotFoundException => return None
     }
-  }
-
-  def findByAdminId(adminId: String): Option[MPoll] = {
-    val query = new Query(pollEntityName).setFilter(new FilterPredicate("adminId", FilterOperator.EQUAL, adminId))
-    val entity = ds.prepare(query).asSingleEntity()
-    Option(entity) map (decode)
   }
 
 }

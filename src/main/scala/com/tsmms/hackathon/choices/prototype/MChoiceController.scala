@@ -1,4 +1,10 @@
-package com.tsmms.hackathon.choices.minimal
+/**
+ * Minimal implementation of the basic idea as a quick 3 man-hour prototype.
+ * Caution: both the UI as well as the code might give you eye cancer. :-)
+ * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
+ * @since 28.02.2015
+ */
+package com.tsmms.hackathon.choices.prototype
 
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
@@ -14,7 +20,7 @@ object MChoiceController {
   def decodeId(encodedId: String): Long = java.lang.Long.parseLong(encodedId, Character.MAX_RADIX)
 
   val pathNewPoll = ""
-  val pathNewPollRegex = pathNewPoll.r
+  val pathNewPollRegex = "/?".r
 
   val pathCreatePoll = "/c"
   val pathCreatePollRegex = pathCreatePoll.r
@@ -33,12 +39,8 @@ object MChoiceController {
 
 }
 
-import com.tsmms.hackathon.choices.minimal.MChoiceController._
+import com.tsmms.hackathon.choices.prototype.MChoiceController._
 
-/**
- * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
- * @since 28.02.2015
- */
 class MChoiceController extends HttpServlet {
 
   override def doGet(request: HttpServletRequest, response: HttpServletResponse): Unit = {
@@ -143,7 +145,7 @@ class ViewPoll(id: Long)(implicit request: HttpServletRequest) extends MControll
   </p> ++ <a href={request.getServletPath + pathAnswerPoll(poll.id.get)}>Create new answer</a> ++
     table("Choice" :: poll.votes.map(_.username), pollTableData(poll.choices, poll.votes.map(_.ratings.map(_
       .toString)))) ++
-    table(List("Choice", "Avg. rating"), pollSummaryData(poll.choices, poll.votes.map(_.ratings))
+    table(List("Choice", "Avg. rating"), pollSummaryData(poll.choices, poll.votes.map(_.ratings)).sortBy(-_(1).toFloat)
     )))
 
   def pollTableData(choices: List[String], votes: List[List[String]]): List[List[String]] = choices match {
@@ -152,7 +154,7 @@ class ViewPoll(id: Long)(implicit request: HttpServletRequest) extends MControll
   }
 
   def pollSummaryData(choices: List[String], votes: List[List[Int]]): List[List[String]] = choices match {
-    case choice :: restChoices => List(choice, votes.map(_.head / votes.size).sum.toString) ::
+    case choice :: restChoices => List(choice, votes.map(_.head.toFloat / votes.size).sum.toString) ::
       pollSummaryData(restChoices, votes.map(_.tail))
     case empty => List.empty
   }

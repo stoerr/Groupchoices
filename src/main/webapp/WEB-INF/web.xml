@@ -10,8 +10,8 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>minichoicedispatcher</servlet-name>
-        <servlet-class>com.tsmms.hackathon.choices.minimal.MChoiceController</servlet-class>
+        <servlet-name>prototypechoicedispatcher</servlet-name>
+        <servlet-class>com.tsmms.hackathon.choices.prototype.MChoiceController</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet>
@@ -47,8 +47,8 @@
         <url-pattern>/c/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>minichoicedispatcher</servlet-name>
-        <url-pattern>/mini/*</url-pattern>
+        <servlet-name>prototypechoicedispatcher</servlet-name>
+        <url-pattern>/prototype/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>helloworld</servlet-name>
