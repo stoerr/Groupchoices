@@ -23,10 +23,16 @@ abstract class AbstractController(request: HttpServletRequest) {
 }
 
 object AbstractController {
+
   def encodeId(id: Long) = java.lang.Long.toString(id, Character.MAX_RADIX)
 
   def decodeId(encodedId: String) = java.lang.Long.parseLong(encodedId, Character.MAX_RADIX)
 
   def makeRandomEncodedId(): String = encodeId(Random.nextLong())
+
+  def transpose[T](matrix: List[List[T]]): List[List[T]] = matrix match {
+    case head :: tail if !head.isEmpty => matrix.map(_.head) :: transpose(matrix.map(_.tail))
+    case _ => List.empty
+  }
 
 }

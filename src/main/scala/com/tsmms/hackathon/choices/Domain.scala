@@ -50,7 +50,7 @@ case class Vote(
                  ) extends DataStoreStorable {
   def copyToEntity(container: PropertyContainer) = {
     container.setProperty("id", id)
-    container.setProperty("usename", username)
+    container.setProperty("username", username)
     container.setProperty("ratings", listToEmbeddedEntity(ratings map (_.toEmbeddedEntity)))
   }
 
