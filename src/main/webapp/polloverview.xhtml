@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" xmlns:wicket="http://wicket.apache.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
     <title>Poll - Make Vote For Poll "POLLNAME"</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Bootstrap theme -->
-    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
-    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet"/>
 </head>
 
 <body role="document">
@@ -44,8 +43,10 @@
 <div class="container">
 
     <div class="page-header">
-        <h1>Poll "POLL NAME"</h1>
+        <h1>Poll <span wicket:id="name">["POLL NAME"]</span></h1>
     </div>
+
+    <p wicket:id="description">[The description]</p>
 
     <form class="form-inline">
         <button type="submit" class="btn btn-primary btn-lg">Make a vote</button>

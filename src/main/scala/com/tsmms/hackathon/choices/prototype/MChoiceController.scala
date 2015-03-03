@@ -45,7 +45,7 @@ class MChoiceController extends HttpServlet {
 
   override def doGet(request: HttpServletRequest, response: HttpServletResponse): Unit = {
     implicit val r = request
-    val page: MController = Option(request.getPathInfo).getOrElse("") match {
+    val page: MController = request.getRequestURI match {
       case pathNewPollRegex() => new NewPoll()
       case pathViewPollRegex(encodedId) => new ViewPoll(decodeId(encodedId))
       case pathAnswerPollRegex(encodedId) => new AnswerPoll(decodeId(encodedId))
@@ -55,7 +55,7 @@ class MChoiceController extends HttpServlet {
 
   override def doPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
     implicit val r = request
-    val page: MController = Option(request.getPathInfo).getOrElse("") match {
+    val page: MController = request.getRequestURI match {
       case pathCreatePollRegex() => new CreatePoll()
       case pathSaveAnswerToPollRegex(encodedId) => new SaveAnswerToPoll(decodeId(encodedId))
     }

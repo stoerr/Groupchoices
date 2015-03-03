@@ -2,7 +2,10 @@ package com.tsmms.hackathon.choices
 
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
+import com.tsmms.hackathon.choices.miniwicket.{MiniWicketProcessor, MiniWicketServletFilter}
+
 import scala.util.Random
+import scala.xml.Text
 
 object ChoiceDispatcher {
   def encodeId(id: Long) = java.lang.Long.toString(id, Character.MAX_RADIX)
@@ -19,15 +22,20 @@ object ChoiceDispatcher {
 class ChoiceDispatcher extends HttpServlet {
 
   override def doPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
+    implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
       case NewPollController.path => response.sendRedirect(new NewPollController(request).processPost())
     }
   }
 
   override def doGet(request: HttpServletRequest, response: HttpServletResponse): Unit = {
+    implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
-      case "/new" => showPage("/newpoll.html", request, response)
-      case PollOverviewController.pathRegex(id) => showPage("/polloverview.html", request, response)
+      case "/new" => showPage("/newpoll.xhtml", request, response)
+      case PollOverviewController.pathRegex(id) =>
+        MiniWicketProcessor.addField("name", new Text("the name also"))
+        MiniWicketProcessor.addField("description", new Text("make the description"))
+        showPage("/polloverview.xhtml", request, response)
     }
   }
 

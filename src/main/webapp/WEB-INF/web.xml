@@ -25,6 +25,14 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
     <filter>
+        <filter-name>miniwicket</filter-name>
+        <filter-class>com.tsmms.hackathon.choices.miniwicket.MiniWicketServletFilter</filter-class>
+        <init-param>
+            <param-name>ignorePaths</param-name>
+            <param-value>css/,img/,js/,/hellodispatch/,/hello/,/prototype/,/hellowicket/</param-value>
+        </init-param>
+    </filter>
+    <filter>
         <filter-name>wicket.filter</filter-name>
         <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
         <init-param>
@@ -33,7 +41,7 @@
         </init-param>
         <init-param>
             <param-name>ignorePaths</param-name>
-            <param-value>css/,img/,js/,/hellodispatch/,/hello/,/mini/</param-value>
+            <param-value>css/,img/,js/,/hellodispatch/,/hello/,/prototype/</param-value>
         </init-param>
         <init-param>
             <param-name>configuration</param-name>
@@ -58,6 +66,10 @@
         <servlet-name>hellodispatcher</servlet-name>
         <url-pattern>/hellodispatch/*</url-pattern>
     </servlet-mapping>
+    <filter-mapping>
+        <filter-name>miniwicket</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>wicket.filter</filter-name>
         <url-pattern>/hellowicket/*</url-pattern>

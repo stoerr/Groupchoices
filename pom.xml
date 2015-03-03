@@ -91,6 +91,26 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Appengine stuff from plugin included directly for debugging and source viewing -->
+        <!-- <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-tools-sdk</artifactId>
+            <version>${appengine.target.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-local-endpoints</artifactId>
+            <version>${appengine.target.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-endpoints</artifactId>
+            <version>${appengine.target.version}</version>
+            <scope>test</scope>
+        </dependency> -->
+
     </dependencies>
     <build>
         <plugins>
@@ -170,6 +190,7 @@
                     <plugin>
                         <groupId>com.google.appengine</groupId>
                         <artifactId>appengine-maven-plugin</artifactId>
+                        <version>${appengine.target.version}</version>
                         <configuration>
                             <jvmFlags>
                                 <jvmFlag>-Xdebug</jvmFlag>
@@ -183,7 +204,6 @@
                     <plugin>
                         <groupId>org.zeroturnaround</groupId>
                         <artifactId>jrebel-maven-plugin</artifactId>
-                        <version>1.1.5</version>
                         <executions>
                             <execution>
                                 <id>generate-rebel-xml</id>
