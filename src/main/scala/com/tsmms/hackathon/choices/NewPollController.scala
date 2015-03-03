@@ -13,7 +13,7 @@ object NewPollController {
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
  * @since 27.02.2015
  */
-class NewPollController(request: HttpServletRequest) {
+class NewPollController(implicit request: HttpServletRequest) {
 
   val allParameters = request.getParameterMap.toArray.asInstanceOf[Array[(String, Array[String])]]
 

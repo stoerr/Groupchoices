@@ -45,14 +45,17 @@ case class Choice(
 
 case class Vote(
                  id: String,
+                 username: String,
                  ratings: List[Rating]
                  ) extends DataStoreStorable {
   def copyToEntity(container: PropertyContainer) = {
     container.setProperty("id", id)
+    container.setProperty("usename", username)
     container.setProperty("ratings", listToEmbeddedEntity(ratings map (_.toEmbeddedEntity)))
   }
 
   def this(entity: EmbeddedEntity) = this(id = entity.getProperty("id").asInstanceOf[String],
+    username = entity.getProperty("username").asInstanceOf[String],
     ratings = readEmbeddedList(entity, "ratings", new Rating(_)))
 }
 

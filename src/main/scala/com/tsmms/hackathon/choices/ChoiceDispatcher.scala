@@ -7,13 +7,7 @@ import com.tsmms.hackathon.choices.miniwicket.{MiniWicketProcessor, MiniWicketSe
 import scala.util.Random
 import scala.xml.Text
 
-object ChoiceDispatcher {
-  def encodeId(id: Long) = java.lang.Long.toString(id, Character.MAX_RADIX)
-
-  def decodeId(encodedId: String) = java.lang.Long.parseLong(encodedId, Character.MAX_RADIX)
-
-  def makeRandomEncodedId(): String = encodeId(Random.nextLong())
-}
+import AbstractController._
 
 /**
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
@@ -24,7 +18,9 @@ class ChoiceDispatcher extends HttpServlet {
   override def doPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
-      case NewPollController.path => response.sendRedirect(new NewPollController(request).processPost())
+      case NewPollController.path => response.sendRedirect(new NewPollController().processPost())
+      case SaveVoteController.pathRegex(encodedId) =>
+        response.sendRedirect(new SaveVoteController(decodeId(encodedId)).processPost())
     }
   }
 
