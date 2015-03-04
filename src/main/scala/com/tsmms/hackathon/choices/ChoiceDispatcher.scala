@@ -2,10 +2,7 @@ package com.tsmms.hackathon.choices
 
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
-import com.tsmms.hackathon.choices.miniwicket.{MiniWicketProcessor, MiniWicketServletFilter}
-
 import scala.util.Random
-import scala.xml.Text
 
 object ChoiceDispatcher {
   def encodeId(id: Long) = java.lang.Long.toString(id, Character.MAX_RADIX)
@@ -24,7 +21,7 @@ class ChoiceDispatcher extends HttpServlet {
   override def doPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
-      case NewPollController.path => response.sendRedirect(new NewPollController(request).processPost())
+      case SavePollController.path => response.sendRedirect(new SavePollController().processPost())
     }
   }
 
@@ -32,15 +29,15 @@ class ChoiceDispatcher extends HttpServlet {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
       case "/new" => showPage("/newpoll.xhtml", request, response)
-      case PollOverviewController.pathRegex(id) =>
-        MiniWicketProcessor.addField("name", new Text("the name also"))
-        MiniWicketProcessor.addField("description", new Text("make the description"))
+      case PollOverviewController.pathRegex(id) => new PollOverviewController(id).process()
         showPage("/polloverview.xhtml", request, response)
     }
   }
 
   def showPage(path: String, request: HttpServletRequest, response: HttpServletResponse): Unit = {
     response.setDateHeader("Expires", 0)
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate") // HTTP 1.1
+    response.setHeader("Pragma", "no-cache") // HTTP 1.0
     getServletContext.getContext("/").getRequestDispatcher(path).forward(request, response)
   }
 

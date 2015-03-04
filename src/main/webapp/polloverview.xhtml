@@ -70,35 +70,26 @@
                     <table class="table table-condensed">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
                                 <th>Choice</th>
-                                <th>Voting</th>
+                                <th wicket:id="username">User 1</th>
+                                <th wicket:remove="true">User 2</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>User 1</td>
-                                <td>Choice 1</td>
-                                <td>4/10</td>
+                        <tr wicket:id="usertablerow">
+                            <th scope="row" wicket:id="choice">Choice 1</th>
+                            <td wicket:id="vote">3</td>
+                            <td wicket:remove="true">7</td>
+                        </tr>
+                        <tr wicket:remove="true">
+                            <th scope="row">Choice 2</th>
+                            <td>8</td>
+                            <td>2</td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>User 2</td>
-                                <td>Choice 1</td>
-                                <td>6/10</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"></td>
-                                <td>Choice 2</td>
-                                <td>4/10</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>User 3</td>
-                                <td>Choice 2</td>
-                                <td>9/10</td>
+                        <tr wicket:remove="true">
+                            <th scope="row">Choice 3</th>
+                            <td>3</td>
+                            <td>6</td>
                             </tr>
                         </tbody>
                     </table>

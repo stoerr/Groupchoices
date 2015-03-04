@@ -5,15 +5,16 @@ import javax.servlet.http.HttpServletRequest
 import scala.collection.JavaConversions._
 import scala.util.Random
 
-object NewPollController {
+object SavePollController {
   val path = "/a"
 }
 
 /**
+ * Saves a new poll
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
  * @since 27.02.2015
  */
-class NewPollController(request: HttpServletRequest) {
+class SavePollController(implicit request: HttpServletRequest) {
 
   val allParameters = request.getParameterMap.toArray.asInstanceOf[Array[(String, Array[String])]]
 
