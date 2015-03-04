@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest
 import com.tsmms.hackathon.choices.miniwicket.MiniWicketProcessor._
 
 object PollOverviewController {
-  def path(id: Long) = "/a/" + ChoiceDispatcher.encodeId(id)
+  def path(id: Long) = "/a/" + AbstractController.encodeId(id)
 
   val pathRegex = "/a/(-?[0-9a-z]+)".r
 }

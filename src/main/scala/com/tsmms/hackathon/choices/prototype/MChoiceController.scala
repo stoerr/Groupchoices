@@ -175,7 +175,6 @@ class SaveAnswerToPoll(id: Long)(implicit request: HttpServletRequest) extends M
   val poll = MPollDao.get(id).get
   val vote = MVote(param("name"), choiceParams.map(_.toInt))
   val savedPoll = MPollDao.saveOrUpdate(poll.copy(votes = vote :: poll.votes))
-  println(savedPoll)
 
   override def view() = Left(pathViewPoll(poll.id.get))
 }

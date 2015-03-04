@@ -2,15 +2,12 @@ package com.tsmms.hackathon.choices
 
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
+import com.tsmms.hackathon.choices.miniwicket.MiniWicketProcessor
+
 import scala.util.Random
+import scala.xml.Text
 
-object ChoiceDispatcher {
-  def encodeId(id: Long) = java.lang.Long.toString(id, Character.MAX_RADIX)
-
-  def decodeId(encodedId: String) = java.lang.Long.parseLong(encodedId, Character.MAX_RADIX)
-
-  def makeRandomEncodedId(): String = encodeId(Random.nextLong())
-}
+import AbstractController._
 
 /**
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
@@ -22,6 +19,8 @@ class ChoiceDispatcher extends HttpServlet {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
       case SavePollController.path => response.sendRedirect(new SavePollController().processPost())
+      case SaveVoteController.pathRegex(encodedId) =>
+        response.sendRedirect(new SaveVoteController(decodeId(encodedId)).processPost())
     }
   }
 
@@ -29,7 +28,7 @@ class ChoiceDispatcher extends HttpServlet {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
       case "/new" => showPage("/newpoll.xhtml", request, response)
-      case PollOverviewController.pathRegex(id) => new PollOverviewController(id).process()
+      case PollOverviewController.pathRegex(id) =>
         showPage("/polloverview.xhtml", request, response)
     }
   }
