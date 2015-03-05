@@ -22,6 +22,7 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
   def process() = {
     addField("name", poll.name)
     addField("description", poll.description)
+    addAction("voteform", NewVoteController.path(id))
     val usernames = poll.votes.map(_.username)
     addRepeater("username", usernames map { name => () =>
       addField("username", name)

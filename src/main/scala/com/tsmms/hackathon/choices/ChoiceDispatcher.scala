@@ -30,6 +30,8 @@ class ChoiceDispatcher extends HttpServlet {
       case "/new" => showPage("/newpoll.xhtml", request, response)
       case PollOverviewController.pathRegex(id) => new PollOverviewController(decodeId(id))
         showPage("/polloverview.xhtml", request, response)
+      case NewVoteController.pathRegex(id) => new NewVoteController(decodeId(id))
+        showPage("/newvote.xhtml", request, response)
     }
   }
 

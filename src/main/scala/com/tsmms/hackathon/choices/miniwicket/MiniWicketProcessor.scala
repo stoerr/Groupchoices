@@ -2,7 +2,7 @@ package com.tsmms.hackathon.choices.miniwicket
 
 import javax.servlet.http.HttpServletRequest
 
-import scala.xml.{Elem, Node, NodeSeq, Text}
+import scala.xml._
 
 /**
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
@@ -47,6 +47,14 @@ object MiniWicketProcessor {
       result
     })
     processorMap = processorMap + (id -> repeaterProcessor)
+  }
+
+  def addAction(id: String, url: String)(implicit request: HttpServletRequest): Unit = {
+    val actionProcessor: Processor = (node: Node) => node match {
+      case elem@Elem(prefix, label, attribs, scope, children@_*) =>
+        Elem(prefix, label, attribs, scope, false, children: _*) % Attribute(null, "action", url, null)
+    }
+    processorMap = processorMap + (id -> actionProcessor)
   }
 
   private def getWicketIdAction(id: String, request: HttpServletRequest): Processor = processorMap(request)(id)
