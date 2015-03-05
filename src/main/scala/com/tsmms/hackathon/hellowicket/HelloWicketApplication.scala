@@ -1,6 +1,6 @@
-package com.tsmms.hackathon.choices.hellowicket
+package com.tsmms.hackathon.hellowicket
 
-import com.tsmms.hackathon.choices.hellowicket.page.HelloPage
+import com.tsmms.hackathon.hellowicket.page.HelloPage
 import org.apache.wicket.markup.html.WebPage
 import org.apache.wicket.protocol.http.WebApplication
 

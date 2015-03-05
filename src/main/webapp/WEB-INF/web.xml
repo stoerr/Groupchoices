@@ -11,17 +11,17 @@
     </servlet>
     <servlet>
         <servlet-name>prototypechoicedispatcher</servlet-name>
-        <servlet-class>com.tsmms.hackathon.choices.prototype.MChoiceController</servlet-class>
+        <servlet-class>com.tsmms.hackathon.choicesprototype.MChoiceController</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>helloworld</servlet-name>
-        <servlet-class>com.tsmms.hackathon.choices.hello.HelloWorldServlet</servlet-class>
+        <servlet-class>com.tsmms.hackathon.helloservlet.HelloWorldServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>hellodispatcher</servlet-name>
-        <servlet-class>com.tsmms.hackathon.choices.hello.HelloDispatcher</servlet-class>
+        <servlet-class>com.tsmms.hackathon.helloservlet.HelloDispatcher</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <filter>
@@ -37,7 +37,7 @@
         <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
         <init-param>
             <param-name>applicationClassName</param-name>
-            <param-value>com.tsmms.hackathon.choices.hellowicket.HelloWicketApplication</param-value>
+            <param-value>com.tsmms.hackathon.hellowicket.HelloWicketApplication</param-value>
         </init-param>
         <init-param>
             <param-name>ignorePaths</param-name>

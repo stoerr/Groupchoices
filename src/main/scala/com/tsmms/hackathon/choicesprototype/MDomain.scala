@@ -1,4 +1,4 @@
-package com.tsmms.hackathon.choices.prototype
+package com.tsmms.hackathon.choicesprototype
 
 import com.google.appengine.api.datastore._
 

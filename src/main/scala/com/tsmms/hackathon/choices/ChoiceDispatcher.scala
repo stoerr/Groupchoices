@@ -28,7 +28,7 @@ class ChoiceDispatcher extends HttpServlet {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
       case "/new" => showPage("/newpoll.xhtml", request, response)
-      case PollOverviewController.pathRegex(id) =>
+      case PollOverviewController.pathRegex(id) => new PollOverviewController(decodeId(id))
         showPage("/polloverview.xhtml", request, response)
     }
   }

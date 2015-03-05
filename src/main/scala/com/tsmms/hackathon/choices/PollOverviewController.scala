@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletRequest
 import com.tsmms.hackathon.choices.miniwicket.MiniWicketProcessor._
 
 object PollOverviewController {
-  def path(id: Long) = "/a/" + AbstractController.encodeId(id)
+  def path(id: Long) = "/c/" + AbstractController.encodeId(id)
 
-  val pathRegex = "/a/(-?[0-9a-z]+)".r
+  val pathRegex = "/c/(-?[0-9a-z]+)".r
 }
 
 /**
@@ -15,17 +15,19 @@ object PollOverviewController {
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
  * @since 27.02.2015
  */
-class PollOverviewController(id: String)(implicit request: HttpServletRequest) {
+class PollOverviewController(id: Long)(implicit request: HttpServletRequest) extends AbstractController(request) {
+
+  val poll = PollDao.get(id).get
 
   def process() = {
-    addField("name", "The name of the poll")
-    addField("description", "Describe describe, describe too.")
-    val usernames = List("User A", "User B")
+    addField("name", poll.name)
+    addField("description", poll.description)
+    val usernames = poll.votes.map(_.username)
     addRepeater("username", usernames map { name => () =>
       addField("username", name)
     })
-    val choices = List("Choice Eins", "Choice 2")
-    val userratingsTransposed = List(List(1, 4), List(3, 7))
+    val choices = poll.choices.map(_.name)
+    val userratingsTransposed = AbstractController.transpose(poll.votes.map(_.ratings.map(_.rating.toString)))
     addRepeater("usertablerow", choices.zip(userratingsTransposed) map { case (choice, ratingsrow) => () =>
       addField("choice", choice)
       addRepeater("vote", ratingsrow map { rating => () =>

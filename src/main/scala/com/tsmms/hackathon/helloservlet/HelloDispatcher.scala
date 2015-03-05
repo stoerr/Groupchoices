@@ -1,4 +1,4 @@
-package com.tsmms.hackathon.choices.hello
+package com.tsmms.hackathon.helloservlet
 
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 

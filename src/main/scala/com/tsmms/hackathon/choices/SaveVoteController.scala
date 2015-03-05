@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletRequest
 import com.tsmms.hackathon.choices.AbstractController._
 
 object SaveVoteController {
-  def path(id: Long) = "/a/" + encodeId(id) + "/v/"
+  def path(id: Long) = "/c/" + encodeId(id) + "/v/"
 
-  val pathRegex = "/a/(-?[0-9a-z]+)/v/".r
+  val pathRegex = "/c/(-?[0-9a-z]+)/v/".r
 }
 
 /**

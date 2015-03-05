@@ -4,7 +4,7 @@
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
  * @since 28.02.2015
  */
-package com.tsmms.hackathon.choices.prototype
+package com.tsmms.hackathon.choicesprototype
 
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
@@ -39,7 +39,7 @@ object MChoiceController {
 
 }
 
-import com.tsmms.hackathon.choices.prototype.MChoiceController._
+import MChoiceController._
 
 class MChoiceController extends HttpServlet {
 

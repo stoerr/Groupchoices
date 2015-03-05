@@ -1,4 +1,4 @@
-package com.tsmms.hackathon.choices.hellowicket.page
+package com.tsmms.hackathon.hellowicket.page
 
 import org.apache.wicket.markup.html.WebPage
 

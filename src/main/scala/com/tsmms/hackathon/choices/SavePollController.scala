@@ -6,7 +6,7 @@ import scala.collection.JavaConversions._
 import scala.util.Random
 
 object SavePollController {
-  val path = "/a"
+  val path = "/c"
 }
 
 /**
@@ -20,7 +20,7 @@ class SavePollController(implicit request: HttpServletRequest) extends AbstractC
 
   val choices = allParameters filter (_._1.startsWith("choice")) map { case (key, values) =>
     (key.substring("choice".length).toInt, values.head)
-  } sortBy (_._1) map (entry => new Choice(makeRandomEncodedId(), entry._2))
+  } sortBy (_._1) map (entry => new Choice(AbstractController.makeRandomEncodedId(), entry._2))
 
   val poll = Poll(id = None, adminId = Random.nextLong().toString, name = request.getParameter("name"), description =
     request.getParameter("description"), choices = choices.toList)
