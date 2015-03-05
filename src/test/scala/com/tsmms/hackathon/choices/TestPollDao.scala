@@ -25,8 +25,8 @@ class TestPollDao extends FlatSpec with BeforeAndAfter {
   val testpoll = Poll(id = None, adminId = "alskdjasd", name = "the name", description = "laber ga gum go",
     choices = List(Choice("hu", "ha"), Choice("foo", "bar")),
     votes = List(
-      Vote("firstuser", ratings = List(Rating("hu", 7), Rating("ha", 4))),
-      Vote("seconduser", ratings = List(Rating("hu", 2), Rating("ha", 8)))
+      Vote(id="id1", username="firstuser", ratings = List(Rating("hu", 7), Rating("ha", 4))),
+      Vote(id="id2", username="seconduser", ratings = List(Rating("hu", 2), Rating("ha", 8)))
     ))
 
   "Poll" should "transform to entities and back" in {

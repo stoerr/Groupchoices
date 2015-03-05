@@ -10,7 +10,13 @@ import org.scalatest.FlatSpec
 class TestNothing extends FlatSpec {
 
   "Nothing" should "be OK" in {
-    assert(true);
+    assert(true)
+  }
+
+  "AbstractController.transpose" should "transpose" in {
+    val l = List(List(1, 2), List(3, 4))
+    val lt = AbstractController.transpose(l)
+    assert(List(List(1, 3), List(2, 4)) == lt)
   }
 
 }
