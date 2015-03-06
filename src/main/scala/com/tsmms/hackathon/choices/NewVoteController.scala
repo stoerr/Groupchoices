@@ -20,8 +20,17 @@ class NewVoteController(id: Long)(implicit request: HttpServletRequest) extends 
   val poll = PollDao.get(id).get
 
   def process(): Unit = {
-    addAction("voteform", SaveVoteController.path(id))
-
+    addAttribute("voteform", "action", SaveVoteController.path(id))
+    addRepeater("choicerow", poll.choices.zipWithIndex map { case (choice, idx) => () =>
+      addField("choice", choice.name)
+      addAttribute("vote", "name", "choice" + idx)
+      addAttribute("choicegroup", "id", "choice" + idx)
+      addRepeater("votelabel", (0 until 9) map { rating => () =>
+        addAttribute("vote", "value", rating.toString)
+        addAttribute("vote", "name", "choice" + rating)
+        addField("rating", rating.toString)
+      })
+    })
   }
 
 }

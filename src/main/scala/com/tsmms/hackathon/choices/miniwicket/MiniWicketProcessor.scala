@@ -26,12 +26,22 @@ object MiniWicketProcessor {
     map
   }
 
+  private def putProcessor(id: String, processor: Processor)(implicit request: HttpServletRequest): Unit = {
+    val oldProcessor = processorMap.get(id)
+    val newProcessor = if (oldProcessor.isEmpty) processor
+    else (node: Node) => {
+      val intermediate = oldProcessor.get.apply(node)
+      intermediate.flatMap(processor)
+    }
+    processorMap = processorMap + (id -> newProcessor)
+  }
+
   def addField(id: String, value: NodeSeq)(implicit request: HttpServletRequest): Unit = {
     val fieldProcessor: Processor = (node: Node) => node match {
       case elem@Elem(prefix, label, attribs, scope, children@_*) =>
         Elem(prefix, label, attribs, scope, false, value: _*)
     }
-    processorMap = processorMap + (id -> fieldProcessor)
+    putProcessor(id, fieldProcessor)
   }
 
   def addField(id: String, value: String)(implicit request: HttpServletRequest): Unit = addField(id, new Text(value))
@@ -39,6 +49,7 @@ object MiniWicketProcessor {
   def addRepeater(id: String, elements: Seq[() => Unit])(implicit request: HttpServletRequest): Unit = {
     val repeaterProcessor: Processor = node => elements flatMap (element => {
       val oldProcessorMap = processorMap
+      processorMap = oldProcessorMap - id
       element() // changes processorMap temporarily
       val Elem(prefix, label, attribs, scope, children@_*) = node
       val processedChildren = children.flatMap(wicketyTransformer(_))
@@ -46,25 +57,27 @@ object MiniWicketProcessor {
       processorMap = oldProcessorMap
       result
     })
-    processorMap = processorMap + (id -> repeaterProcessor)
+    putProcessor(id, repeaterProcessor)
   }
 
-  def addAction(id: String, url: String)(implicit request: HttpServletRequest): Unit = {
+  def addAttribute(id: String, name: String, value: String)(implicit request: HttpServletRequest): Unit = {
     val actionProcessor: Processor = (node: Node) => node match {
       case elem@Elem(prefix, label, attribs, scope, children@_*) =>
-        Elem(prefix, label, attribs, scope, false, children: _*) % Attribute(null, "action", url, Null)
+        val processedChildren = children.flatMap(wicketyTransformer(_))
+        Elem(prefix, label, attribs, scope, false, processedChildren: _*) % Attribute(null, name, value, Null)
     }
-    processorMap = processorMap + (id -> actionProcessor)
+    putProcessor(id, actionProcessor)
   }
 
-  private def getWicketIdAction(id: String, request: HttpServletRequest): Processor = processorMap(request)(id)
+  private def getWicketIdAction(id: String, request: HttpServletRequest): Option[Processor] = processorMap(request).get(id)
 
   def wicketyTransformer(xml: NodeSeq)(implicit request: HttpServletRequest): NodeSeq =
     xml flatMap (node => node match {
-      case elem: Elem if elem.attribute(wicketNS, "id").isDefined =>
+      case elem@Elem(prefix, label, attribs, scope, children@_*) if elem.attribute(wicketNS, "id").isDefined =>
         val id = node.attribute(wicketNS, "id").get(0).text
-        val action: Processor = getWicketIdAction(id, request)
-        action(elem)
+        val action: Option[Processor] = getWicketIdAction(id, request)
+        if (action.isDefined) (action.get)(elem)
+        else Elem(prefix, label, attribs, scope, false, wicketyTransformer(children): _*)
       case elem@Elem(prefix, label, attribs, scope, children@_*) if elem.attribute(wicketNS, "remove").isDefined =>
         Text("")
       case Elem(prefix, label, attribs, scope, children@_*) =>

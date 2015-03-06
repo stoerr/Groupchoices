@@ -27,12 +27,6 @@ class SaveVoteController(id: Long)(implicit request: HttpServletRequest) extends
   val savedPoll = PollDao.saveOrUpdate(poll.copy(votes = poll.votes :+ vote))
 
   def processPost(): String = {
-    addRepeater("choicerowX", poll.choices map { case choice => () =>
-      addField("choice", choice.name)
-      /* addRepeater("vote", ratingsrow map { rating => () =>
-        addField("vote", rating.toString)
-      }) */
-    })
     return PollOverviewController.path(savedPoll.id.get)
   }
 

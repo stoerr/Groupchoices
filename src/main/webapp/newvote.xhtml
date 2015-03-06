@@ -57,39 +57,40 @@
             <div class="panel-body">
                 <div class="form-group" wicket:id="choicerow">
                     <label for="choice1group" class="col-sm-3 control-label" wicket:id="choice">Choice 1</label>
-                    <fieldset class="col-sm-7 col-sm-offset-2" id="choice1group">
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option0"> 0 </input>
+                    <fieldset class="col-sm-7 col-sm-offset-2" id="choice1group" wicket:id="choicegroup">
+                        <label class="radio-inline" wicket:id="votelabel">
+                            <input type="radio" name="choice1" value="0" wicket:id="vote"/>
+                            <span wicket:id="rating">0</span>
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option1"> 1 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="1"/> 1
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option2"> 2 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="2"/> 2
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option3"> 3 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="3"/> 3
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option1"> 4 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="4"/> 4
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option2"> 5 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="5"/> 5
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option3"> 6 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="6"/> 6
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option1"> 7 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="7"/> 7
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option2"> 8 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="8"/> 8
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option3"> 9 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="9"/> 9
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="choice1" value="option3"> 10 </input>
+                        <label class="radio-inline" wicket:remove="true">
+                            <input type="radio" name="choice1" value="10"/> 10
                         </label>
                     </fieldset>
                 </div>
