@@ -26,7 +26,7 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
     addField("description", poll.description)
     addAttribute("voteform", "action", NewVoteController.path(id))
     val usernames = poll.votes.map(_.username)
-    addRepeater("username", usernames map { name => () =>
+    addRepeater("usernamerepeat", usernames map { name => () =>
       addField("username", name)
     })
     val choices = poll.choices.map(_.name)
@@ -34,7 +34,7 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
     // val userratingsTransposed = if (poll.votes.size > 0) userratings.transpose else List.fill(choices.size)(List.empty[String])
     addRepeater("usertablerow", choices.zip(userratings) map { case (choice, ratingsrow) => () =>
       addField("choice", choice)
-      addRepeater("vote", ratingsrow map { rating => () =>
+      addRepeater("voterepeat", ratingsrow map { rating => () =>
         addField("vote", rating)
       })
     })
