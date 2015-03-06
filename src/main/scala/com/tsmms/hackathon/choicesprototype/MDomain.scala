@@ -23,8 +23,6 @@ object MPollDao {
   import org.json4s.native.Serialization.{read, write}
 
   implicit val formats = Serialization.formats(NoTypeHints)
-  // scala> val ser = write(Child("Mary", 5, None))
-  // scala> read[Child](ser)
 
   val pollEntityName = "MPoll"
 
@@ -32,13 +30,13 @@ object MPollDao {
 
   def saveOrUpdate(poll: MPoll): MPoll = {
     val entity = if (poll.id.isDefined) new Entity(pollEntityName, poll.id.get) else new Entity(pollEntityName)
-    entity.setUnindexedProperty("pickled", new Text(write(poll)))
+    entity.setUnindexedProperty("json", new Text(write(poll)))
     val key = ds.put(entity)
     poll.copy(id = Some(key.getId))
   }
 
   private def decode(entity: Entity): MPoll =
-    read[MPoll](entity.getProperty("pickled").asInstanceOf[Text].getValue).copy(id = Some(entity.getKey.getId))
+    read[MPoll](entity.getProperty("json").asInstanceOf[Text].getValue).copy(id = Some(entity.getKey.getId))
 
   def get(id: Long): Option[MPoll] = {
     try {

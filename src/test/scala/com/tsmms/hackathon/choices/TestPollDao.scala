@@ -29,13 +29,6 @@ class TestPollDao extends FlatSpec with BeforeAndAfter {
       Vote(id="id2", username="seconduser", ratings = List(Rating("hu", 2), Rating("ha", 8)))
     ))
 
-  "Poll" should "transform to entities and back" in {
-    val entity = new Entity(pollEntityName, 42L)
-    testpoll.copyToEntity(entity)
-    val readback: Poll = new Poll(entity)
-    assert(testpoll.copy(id = Some(42)) == readback)
-  }
-
   "PollDao" should "save and retrieve DsSaveEntities" in {
 
     val savedpoll = saveOrUpdate(testpoll)

@@ -2,6 +2,7 @@ package com.tsmms.hackathon.choices
 
 import com.google.appengine.api.datastore.Query.{FilterOperator, FilterPredicate}
 import com.google.appengine.api.datastore._
+import com.tsmms.hackathon.choicesprototype.MPoll
 
 import scala.collection.JavaConversions._
 
@@ -43,6 +44,12 @@ object DataStoreStorable {
  */
 object PollDao {
 
+  import org.json4s._
+  import org.json4s.native.Serialization
+  import org.json4s.native.Serialization.{read, write}
+
+  implicit val formats = Serialization.formats(NoTypeHints)
+
   val pollEntityName = "Poll"
 
   val ds = DatastoreServiceFactory.getDatastoreService
@@ -54,14 +61,19 @@ object PollDao {
     val entity = if (obj.id.isEmpty) new Entity(pollEntityName)
     else ds.get(KeyFactory.createKey(pollEntityName, obj
       .id.get))
-    obj.copyToEntity(entity)
+    entity.setProperty("adminId", obj.adminId)
+    entity.setUnindexedProperty("json", new Text(write(obj)))
     val savedKey = ds.put(entity)
     obj.copy(id = Some(savedKey.getId))
   }
 
+  private def decode(entity: Entity): Poll =
+    read[Poll](entity.getProperty("json").asInstanceOf[Text].getValue).copy(id = Some(entity.getKey.getId))
+
   def get(id: Long): Option[Poll] = {
     try {
-      Some(new Poll(ds.get(makeKey(id))))
+      val entity = ds.get(makeKey(id))
+      Some(decode(entity))
     } catch {
       case _: EntityNotFoundException => None
     }
@@ -70,7 +82,7 @@ object PollDao {
   def findByAdminId(adminId: String): Option[Poll] = {
     val query = new Query(pollEntityName).setFilter(new FilterPredicate("adminId", FilterOperator.EQUAL, adminId))
     val entity = ds.prepare(query).asSingleEntity()
-    Option(entity) map (new Poll(_))
+    Option(entity) map (decode)
   }
 
 
