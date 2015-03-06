@@ -27,11 +27,11 @@ class ChoiceDispatcher extends HttpServlet {
   override def doGet(request: HttpServletRequest, response: HttpServletResponse): Unit = {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
-      case "/new" => showPage("/newpoll.xhtml", request, response)
+      case "/new" | "" | "/" => showPage("/createpoll.xhtml", request, response)
       case PollOverviewController.pathRegex(id) => new PollOverviewController(decodeId(id)).process()
         showPage("/polloverview.xhtml", request, response)
       case NewVoteController.pathRegex(id) => new NewVoteController(decodeId(id)).process()
-        showPage("/newvote.xhtml", request, response)
+        showPage("/createvote.xhtml", request, response)
     }
   }
 

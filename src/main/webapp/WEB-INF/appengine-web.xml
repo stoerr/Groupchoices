@@ -36,6 +36,9 @@
         <include path="/**.html" expiration="7d">
             <http-header name="Pragma" value="Public"/>
         </include>
+        <include path="/**.xhtml" expiration="7d">
+            <http-header name="Pragma" value="Public"/>
+        </include>
         <include path="/**.txt" expiration="7d">
             <http-header name="Pragma" value="Public"/>
         </include>

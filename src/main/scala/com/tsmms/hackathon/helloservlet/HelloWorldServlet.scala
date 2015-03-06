@@ -25,12 +25,9 @@ class HelloWorldServlet extends HttpServlet {
     req.setAttribute("description", "This is a hello world page!")
     val body: NodeSeq = <p>We do have
       {callCount}
-      calls</p> ++
-      <p>
-        <a href="/hellodispatch/huhu/42?helloinput=17">Hello world dispatcher</a>
-      </p>
+      calls</p>
     req.setAttribute("mainarea", body)
-    getServletContext.getRequestDispatcher("/jsp/frame.jsp").forward(req, resp)
+    getServletContext.getRequestDispatcher("/test/frame.jsp").forward(req, resp)
   }
 
   def callCount: Int = {

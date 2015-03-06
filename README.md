@@ -17,14 +17,20 @@ result: presents the best choice(s) for the group.
 Code
 ====
 
-In com.tsmms.hackathon.choices.prototype there is very quick a prototype (3 man hours)
+There is a simple hello world servlet (...helloservlet), some explorations how you
+might use wicket with scala (...hellowicket) and how you can use the XML mode of Scala
+instead of using a web framework (...hellodispatcher).
+
+In com.tsmms.hackathon.choicesprototype there is very quick a prototype (3 man hours)
 with some very basic functionality that actually works. Might cause eye cancer and has no
-documentation - kind of write only code.
+documentation - kind of write only code. Based on the idea in ...hellodispatcher.
 
-There is some more code for a full version, but that's not working yet.
+com.tsmms.hackathon.choices contains the full version with basic functionality, but which
+is quite incomplete yet. There is no functionality to change the questionnaires and votes,
+no descriptions and the web pages are not quite complete. Still, it is somewhat usable.
 
-Rough URL design
-================
+URL design
+==========
 
 uvw, xyz and lmn are random numbers encoded base64.
 

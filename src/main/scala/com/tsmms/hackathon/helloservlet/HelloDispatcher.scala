@@ -23,7 +23,7 @@ class HelloDispatcher extends HttpServlet {
         request.setAttribute("description", view.description)
         request.setAttribute("mainarea", view.mainarea)
         response.setDateHeader("Expires", 0)
-        getServletContext.getRequestDispatcher("/jsp/frame.jsp").forward(request, response)
+        getServletContext.getRequestDispatcher("/test/frame.jsp").forward(request, response)
     }
   }
 
@@ -61,7 +61,7 @@ trait HTMLRendering {
 }
 
 object HelloController {
-  val pathRegex = "/hellodispatch/huhu/([0-9]+)".r
+  val pathRegex = "/test/hellodispatch/huhu/([0-9]+)".r
 }
 
 // http://localhost:9090/hellodispatch/huhu/42?helloinput=17

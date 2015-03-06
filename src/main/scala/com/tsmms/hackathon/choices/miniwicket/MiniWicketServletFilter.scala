@@ -52,8 +52,7 @@ class OutputCapturingServletResponseWrapper(response: HttpServletResponse) exten
 
   val capturedOutput = new ByteArrayOutputStream()
 
-  /** Seems to be unused. */
-  override def getWriter: PrintWriter = ???
+  override def getWriter: PrintWriter = new PrintWriter(getOutputStream)
 
   override def getOutputStream: ServletOutputStream = new ServletOutputStream {
     override def write(b: Int): Unit = capturedOutput.write(b)
