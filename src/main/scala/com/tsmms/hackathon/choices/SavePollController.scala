@@ -6,21 +6,17 @@ import scala.collection.JavaConversions._
 import scala.util.Random
 
 object SavePollController {
-  val path = "/c"
+  val path = "/a"
 }
 
 /**
  * Saves a new poll
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>
- * @since 27.02.2015
+ * @since 27.02.201
  */
 class SavePollController(implicit request: HttpServletRequest) extends AbstractController(request) {
 
-  val allParameters = request.getParameterMap.toArray.asInstanceOf[Array[(String, Array[String])]]
-
-  val choices = allParameters filter (_._1.startsWith("choice")) map { case (key, values) =>
-    (key.substring("choice".length).toInt, values.head)
-  } sortBy (_._1) map (entry => new Choice(AbstractController.makeRandomEncodedId(), entry._2))
+  val choices = choiceParameters map (name => new Choice(AbstractController.makeRandomEncodedId(), name))
 
   val poll = Poll(id = None, adminId = Random.nextLong().toString, name = request.getParameter("name"), description =
     request.getParameter("description"), choices = choices.toList)

@@ -19,6 +19,8 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
 
   val poll = PollDao.get(id).get
 
+  println("Overview : " + poll)
+
   def process() = {
     addField("name", poll.name)
     addField("description", poll.description)
@@ -28,7 +30,8 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
       addField("username", name)
     })
     val choices = poll.choices.map(_.name)
-    val userratingsTransposed = AbstractController.transpose(poll.votes.map(_.ratings.map(_.rating.toString)))
+    val userratings = poll.votes.map(_.ratings.map(_.rating.toString)).transpose
+    val userratingsTransposed = if (poll.votes.size > 0) userratings.transpose else List.fill(choices.size)(List.empty[String])
     addRepeater("usertablerow", choices.zip(userratingsTransposed) map { case (choice, ratingsrow) => () =>
       addField("choice", choice)
       addRepeater("vote", ratingsrow map { rating => () =>

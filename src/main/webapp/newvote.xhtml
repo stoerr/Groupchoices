@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" xmlns:wicket="http://wicket.apache.org">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,12 +9,12 @@
     <title>Poll - Make Vote For Poll "POLLNAME"</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
-    <link href="css/theme.css" rel="stylesheet" />
+    <link href="/css/theme.css" rel="stylesheet"/>
 </head>
 
 <body role="document">
@@ -51,13 +50,13 @@
         <div class="form-group">
             <label for="inputName" class="col-sm-2 control-label">User Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" />
+                <input type="text" class="form-control" id="inputName" placeholder="Name" name="username"/>
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="form-group">
-                    <label for="choice1group" class="col-sm-3 control-label">Choice 1</label>
+                <div class="form-group" wicket:id="choicerow">
+                    <label for="choice1group" class="col-sm-3 control-label" wicket:id="choice">Choice 1</label>
                     <fieldset class="col-sm-7 col-sm-offset-2" id="choice1group">
                         <label class="radio-inline">
                             <input type="radio" name="choice1" value="option0"> 0 </input>

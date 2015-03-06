@@ -3,6 +3,7 @@ package com.tsmms.hackathon.choices
 import javax.servlet.http.HttpServletRequest
 
 import com.tsmms.hackathon.choices.AbstractController._
+import com.tsmms.hackathon.choices.miniwicket.MiniWicketProcessor._
 
 object SaveVoteController {
   def path(id: Long) = "/c/" + encodeId(id) + "/v/"
@@ -20,9 +21,18 @@ class SaveVoteController(id: Long)(implicit request: HttpServletRequest) extends
   val poll = PollDao.get(id).get
   val vote = Vote(id = makeRandomEncodedId(), username = parameter("username"),
     (poll.choices, choiceParameters).zipped.map((choice, param) => Rating(choice.id, param.toInt)))
+
+  require(poll.choices.size == choiceParameters.size, "Received not exactly as many poll answers as poll choices.")
+
   val savedPoll = PollDao.saveOrUpdate(poll.copy(votes = poll.votes :+ vote))
 
   def processPost(): String = {
+    addRepeater("choicerowX", poll.choices map { case choice => () =>
+      addField("choice", choice.name)
+      /* addRepeater("vote", ratingsrow map { rating => () =>
+        addField("vote", rating.toString)
+      }) */
+    })
     return PollOverviewController.path(savedPoll.id.get)
   }
 

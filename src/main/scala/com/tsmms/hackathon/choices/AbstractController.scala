@@ -30,9 +30,4 @@ object AbstractController {
 
   def makeRandomEncodedId(): String = encodeId(Random.nextLong())
 
-  def transpose[T](matrix: List[List[T]]): List[List[T]] = matrix match {
-    case head :: tail if !head.isEmpty => matrix.map(_.head) :: transpose(matrix.map(_.tail))
-    case _ => List.empty
-  }
-
 }

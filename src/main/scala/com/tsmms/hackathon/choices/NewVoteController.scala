@@ -21,6 +21,7 @@ class NewVoteController(id: Long)(implicit request: HttpServletRequest) extends 
 
   def process(): Unit = {
     addAction("voteform", SaveVoteController.path(id))
+
   }
 
 }
