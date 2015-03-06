@@ -6,6 +6,8 @@ ratings for all possible choices. The idea is to extend that later by different 
 of ratings and different algorithms to find the best choices: specify 0-9 or one to five star
 ratings per item, specify a order of preference between them, ...
 
+You can view it, as far as it's done yet, on http://groupchoices.appspot.com/
+
 Terms
 =====
 
@@ -19,7 +21,8 @@ Code
 
 There is a simple hello world servlet (...helloservlet), some explorations how you
 might use wicket with scala (...hellowicket) and how you can use the XML mode of Scala
-instead of using a web framework (...hellodispatcher).
+instead of using a web framework (...hellodispatcher). You can find these on
+http:/localhost:9090/test (using the development server) or http://groupchoices.appspot.com/test/
 
 In com.tsmms.hackathon.choicesprototype there is very quick a prototype (3 man hours)
 with some very basic functionality that actually works. Might cause eye cancer and has no
