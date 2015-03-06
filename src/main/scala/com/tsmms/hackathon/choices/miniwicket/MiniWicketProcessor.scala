@@ -52,7 +52,7 @@ object MiniWicketProcessor {
   def addAction(id: String, url: String)(implicit request: HttpServletRequest): Unit = {
     val actionProcessor: Processor = (node: Node) => node match {
       case elem@Elem(prefix, label, attribs, scope, children@_*) =>
-        Elem(prefix, label, attribs, scope, false, children: _*) % Attribute(null, "action", url, null)
+        Elem(prefix, label, attribs, scope, false, children: _*) % Attribute(null, "action", url, Null)
     }
     processorMap = processorMap + (id -> actionProcessor)
   }

@@ -3,6 +3,7 @@ package com.tsmms.hackathon.choices
 import javax.servlet.http.HttpServletRequest
 
 import com.tsmms.hackathon.choices.AbstractController._
+import com.tsmms.hackathon.choices.miniwicket.MiniWicketProcessor._
 
 object NewVoteController {
   def path(id: Long) = "/c/" + encodeId(id) + "/new"
@@ -19,7 +20,7 @@ class NewVoteController(id: Long)(implicit request: HttpServletRequest) extends 
   val poll = PollDao.get(id).get
 
   def process(): Unit = {
-
+    addAction("voteform", SaveVoteController.path(id))
   }
 
 }
