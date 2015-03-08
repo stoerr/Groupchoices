@@ -28,12 +28,16 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
     addAttribute("voteform", "action", NewVoteController.path(id))
 
     val usernames = poll.votes.map(_.username)
+    addField("polllink", request.getRequestURL.toString)
+    addAttribute("polllinkhref", "href", request.getRequestURL.toString)
+
     addRepeater("usernamerepeat", usernames map { name => () =>
       addField("username", name)
     })
     val choices = poll.choices.map(_.name)
     val userratings = poll.votes.map(_.ratings.map(_.rating))
-    val userratingsTransposed = if (poll.votes.size > 0) userratings.transpose else List.fill(choices.size)(List.empty[Int])
+    val userratingsTransposed = if (poll.votes.size > 0) userratings.transpose else List.fill(choices.size)(List
+      .empty[Int])
     addRepeater("usertablerow", choices.zip(userratingsTransposed) map { case (choice, ratingsrow) => () =>
       addField("choice", choice)
       addRepeater("voterepeat", ratingsrow map { rating => () =>
@@ -41,11 +45,15 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
       })
     })
 
+    val choiceTablePresent = if (0 < poll.votes.length) Some(() => ()) else None
+    addRepeater("choicetable", choiceTablePresent.toList)
+
     val averageRatings = userratingsTransposed.map(row => row.sum * 1.0 / row.length)
     addRepeater("choicetablerow", choices.zip(averageRatings) map { case (choice, avgrating) => () =>
       addField("choice", choice)
       addField("avgrating", avgrating.toFloat.toString)
     })
+
   }
 
 }

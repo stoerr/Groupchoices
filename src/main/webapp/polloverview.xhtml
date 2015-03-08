@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" xmlns:wicket="http://wicket.apache.org">
 <head>
     <meta charset="utf-8"/>
@@ -9,9 +10,9 @@
     <title>Poll - Make Vote For Poll "POLLNAME"</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
     <!-- Bootstrap theme -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 
     <!-- Custom styles for this template -->
     <link href="/css/theme.css" rel="stylesheet"/>
@@ -22,7 +23,8 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -36,7 +38,8 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-        </div><!--/.nav-collapse -->
+        </div>
+        <!--/.nav-collapse -->
     </div>
 </nav>
 
@@ -48,32 +51,42 @@
 
     <p wicket:id="description">[The description]</p>
 
+    <p>You can invite others to take part in this poll by sending them the link
+        <a href="polllinkhref" target="_blank"><span wicket:id="polllink">(link)</span></a>
+        to this page. Please don't lose it - otherwise there is no way to access your poll. The current results are
+        presented below.</p>
+
     <form class="form-inline" wicket:id="voteform" method="get">
         <button type="submit" class="btn btn-primary btn-lg">Make a vote</button>
     </form>
 
-    <h3>Voting Result <small><span wicket:id="usercount">3</span> user(s) already voted</small></h3>
+    <h3>Voting Result
+        <small><span wicket:id="usercount">3</span> user(s) already voted</small>
+    </h3>
 
     <div role="tabpanel">
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">Voting</a></li>
-            <li role="presentation"><a href="#stats" aria-controls="stats" role="tab" data-toggle="tab">Statistics</a></li>
+            <li role="presentation" class="active"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">Voting</a>
+            </li>
+            <li role="presentation"><a href="#stats" aria-controls="stats" role="tab" data-toggle="tab">Statistics</a>
+            </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="voting">
                 <p></p>
+
                 <div class="table-responsive">
                     <table class="table table-condensed">
                         <thead>
-                            <tr>
-                                <th>Choice</th>
-                                <th wicket:id="usernamerepeat"><span wicket:id="username">User 1</span></th>
-                                <th wicket:remove="true">User 2</th>
-                            </tr>
+                        <tr>
+                            <th>Choice</th>
+                            <th wicket:id="usernamerepeat"><span wicket:id="username">User 1</span></th>
+                            <th wicket:remove="true">User 2</th>
+                        </tr>
                         </thead>
                         <tbody>
                         <tr wicket:id="usertablerow">
@@ -85,12 +98,12 @@
                             <th scope="row">Choice 2</th>
                             <td>8</td>
                             <td>2</td>
-                            </tr>
+                        </tr>
                         <tr wicket:remove="true">
                             <th scope="row">Choice 3</th>
                             <td>3</td>
                             <td>6</td>
-                            </tr>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -100,7 +113,8 @@
             </div>
         </div>
         <p></p>
-        <div class="table-responsive">
+
+        <div class="table-responsive" wicket:id="choicetable">
             <table class="table table-condensed">
                 <thead>
                 <tr>
@@ -126,7 +140,8 @@
         </div>
     </div>
 
-</div><!-- /.container -->
+</div>
+<!-- /.container -->
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
