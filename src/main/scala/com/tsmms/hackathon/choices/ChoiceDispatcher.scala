@@ -2,12 +2,7 @@ package com.tsmms.hackathon.choices
 
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
-import com.tsmms.hackathon.choices.miniwicket.MiniWicketProcessor
-
-import scala.util.Random
-import scala.xml.Text
-
-import AbstractController._
+import com.tsmms.hackathon.choices.AbstractController._
 
 /**
  * @author <a href="http://www.stoerr.net/">Hans-Peter Stoerr</a>

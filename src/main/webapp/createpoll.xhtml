@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" xmlns:wicket="http://wicket.apache.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -64,9 +64,11 @@
     <p>
         <strong>CAUTION:</strong> Please don't use this for anything important, or where anybody could be more than
         mildly annoyed if anything
-        goes wrong. We created this since we wanted to have some fun with Scala and Bootstrap and because we thougt
-        this could actually be useful sometimes - nobody got payed anything for any of that. So, there are absolutely no
-        warranties. That said, feedback is welcome.
+        goes wrong. We created this since we wanted to have some fun with <a href="http://scala-lang.org/">Scala</a>,
+        <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://cloud.google.com/appengine/">Google app
+        engine</a>, and because we thought
+        this could actually be useful sometimes. Nobody got payed anything for any of that. So, there are absolutely no
+        warranties. That said, <a href="https://github.com/stoerr/Groupchoices/issues">feedback is welcome</a>.
     </p>
 
     <form class="form-horizontal" method="post" action="/a">
@@ -115,12 +117,54 @@
                         <input type="text" class="form-control" id="choice4" placeholder="Choice 4" name="choice4"/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="choice4" class="col-sm-2 control-label">Choice 5</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice5" placeholder="Choice 5" name="choice5"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice4" class="col-sm-2 control-label">Choice 6</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice6" placeholder="Choice 6" name="choice6"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice4" class="col-sm-2 control-label">Choice 7</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice7" placeholder="Choice 7" name="choice7"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice4" class="col-sm-2 control-label">Choice 8</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice8" placeholder="Choice 8" name="choice8"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice4" class="col-sm-2 control-label">Choice 9</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice9" placeholder="Choice 9" name="choice9"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice4" class="col-sm-2 control-label">Choice 10</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="choice10" placeholder="Choice 10" name="choice10"/>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-1">
+            <!-- <div class="col-sm-offset-2 col-sm-1">
                 <button type="submit" class="btn btn-default">Abort</button>
-            </div>
+            </div> -->
             <div class="col-sm-9">
                 <button type="submit" class="btn btn-primary">Create Poll</button>
             </div>
