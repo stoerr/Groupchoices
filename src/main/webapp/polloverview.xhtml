@@ -99,7 +99,31 @@
                 The stats go here ...
             </div>
         </div>
-
+        <p></p>
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>Choice</th>
+                    <th>Average Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr wicket:id="choicetablerow">
+                    <th scope="row" wicket:id="choice">Choice 1</th>
+                    <td wicket:id="avgrating">2</td>
+                </tr>
+                <tr wicket:remove="true">
+                    <th scope="row">Choice 2</th>
+                    <td>8</td>
+                </tr>
+                <tr wicket:remove="true">
+                    <th scope="row">Choice 3</th>
+                    <td>3</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div><!-- /.container -->

@@ -6,7 +6,9 @@ ratings for all possible choices. The idea is to extend that later by different 
 of ratings and different algorithms to find the best choices: specify 0-9 or one to five star
 ratings per item, specify a order of preference between them, ...
 
-You can view it, as far as it's done yet, on http://groupchoices.appspot.com/
+You can view it, as far as it's done yet, on http://groupchoices.appspot.com/ .
+
+The HTML was done by Stefan Scheidewig, the Scala code by Hans-Peter Störr.
 
 Terms
 =====
@@ -31,6 +33,10 @@ documentation - kind of write only code. Based on the idea in ...hellodispatcher
 com.tsmms.hackathon.choices contains the full version with basic functionality, but which
 is quite incomplete yet. There is no functionality to change the questionnaires and votes,
 no descriptions and the web pages are not quite complete. Still, it is somewhat usable.
+
+Caution: This was done mostly in the spirit "let's hack around with Scala and Twitter Bootstrap".
+So this is more or less "write only code", though I maintain to an Scala adept it is still
+more readable than most Java Code, since it is much more concise and to the point.
 
 URL design
 ==========
