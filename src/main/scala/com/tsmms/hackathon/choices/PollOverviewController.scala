@@ -19,7 +19,7 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
 
   val poll = PollDao.get(id).get
 
-  println("Overview : " + poll)
+  // println("Overview : " + poll)
 
   def process() = {
     addField("name", poll.name)

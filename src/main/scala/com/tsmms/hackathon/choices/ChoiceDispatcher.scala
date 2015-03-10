@@ -34,6 +34,8 @@ class ChoiceDispatcher extends HttpServlet {
     response.setDateHeader("Expires", 0)
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate") // HTTP 1.1
     response.setHeader("Pragma", "no-cache") // HTTP 1.0
+    response.setContentType("application/xhtml+xml")
+    response.setCharacterEncoding("UTF-8")
     getServletContext.getContext("/").getRequestDispatcher(path).forward(request, response)
   }
 
