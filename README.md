@@ -14,8 +14,11 @@ Terms
 =====
 
 poll: a number of items (choices) the group has to select from
+
 choice: one possibility to choose
+
 vote: a number of ratings by one group member (user) for all choices
+
 result: presents the best choice(s) for the group.
 
 Code
