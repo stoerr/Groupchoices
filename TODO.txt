@@ -1,0 +1,12 @@
+Functionality (incl. Scala).
+- admin page to delete poll
+- later: extend admin page to change choices
+- page for a vote that can be bookmarked and used to change / delete it
+
+Misc. Webpages
+- Einstiegsseite an den Anfang stellen, createpoll als separate Seite
+- Impressum
+- Design bestehender Seiten aufpeppen
+
+Optional stuff:
+- Use Apache Wicket

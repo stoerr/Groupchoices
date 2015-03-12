@@ -46,13 +46,13 @@ uvw, xyz and lmn are random numbers encoded base64.
 - /
     * GET : Description . Links to /new
 - /new
-    * GET : Form for creating a new choice
+    * GET : Form for creating a new poll
 - /a
-    * PUT : creates choice, redirects to /a/uvw with fresh uvw
+    * PUT : creates poll, redirects to /a/uvw with fresh uvw
 - /a/uvw
     * GET : displays admin page for a choice, contains link to /c/xyz
-    * (POST : changes choice, redirects to GET /a/uvw)
-    * (DELETE : deletes choice, redirects to /)
+    * (POST : changes poll, redirects to GET /a/uvw)
+    * (DELETE : deletes poll, redirects to /)
 - /c/xyz
     * GET : presents current answers, incl. result ; contains link to /c/xyz/new
 - /c/xyz/new
