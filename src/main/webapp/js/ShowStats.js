@@ -2,7 +2,7 @@
   * Create a bar chart representing the current rating situation.
   */
 
-$('a[data-toggle="tab"][href="#stats"]').on('shown.bs.tab', function (e) {
+$('a[data-toggle="tab"][href="#graph"]').on('shown.bs.tab', function (e) {
     var chartAlreadyCreated = (e.target.chartCreated === true);
 
     if (!chartAlreadyCreated) {

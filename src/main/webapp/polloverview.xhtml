@@ -52,7 +52,7 @@
     <p wicket:id="description">[The description]</p>
 
     <p>You can invite others to take part in this poll by sending them the link
-        <a href="polllinkhref" target="_blank"><span wicket:id="polllink">(link)</span></a>
+        <a href="#" wicket:id="polllinkhref" target="_blank"><span wicket:id="polllink">(link)</span></a>
         to this page. Please don't lose it - otherwise there is no way to access your poll. The current results are
         presented below.</p>
 
@@ -71,6 +71,8 @@
             <li role="presentation" class="active"><a href="#voting" aria-controls="home" role="tab" data-toggle="tab">Voting</a>
             </li>
             <li role="presentation"><a href="#stats" aria-controls="stats" role="tab" data-toggle="tab">Statistics</a>
+            </li>
+            <li role="presentation"><a href="#graph" aria-controls="graph" role="tab" data-toggle="tab">Graph</a>
             </li>
         </ul>
 
@@ -109,35 +111,37 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="stats">
+                <div class="table-responsive" wicket:id="choicetable">
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Choice</th>
+                            <th>Average Rating</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr wicket:id="choicetablerow">
+                            <th scope="row" wicket:id="choice">Choice 1</th>
+                            <td wicket:id="avgrating">2</td>
+                        </tr>
+                        <tr wicket:remove="true">
+                            <th scope="row">Choice 2</th>
+                            <td>8</td>
+                        </tr>
+                        <tr wicket:remove="true">
+                            <th scope="row">Choice 3</th>
+                            <td>3</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="graph">
                 <canvas id="choicechart" width="320" height="200"></canvas>
             </div>
         </div>
         <p></p>
 
-        <div class="table-responsive" wicket:id="choicetable">
-            <table class="table table-condensed">
-                <thead>
-                <tr>
-                    <th>Choice</th>
-                    <th>Average Rating</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr wicket:id="choicetablerow">
-                    <th scope="row" wicket:id="choice">Choice 1</th>
-                    <td wicket:id="avgrating">2</td>
-                </tr>
-                <tr wicket:remove="true">
-                    <th scope="row">Choice 2</th>
-                    <td>8</td>
-                </tr>
-                <tr wicket:remove="true">
-                    <th scope="row">Choice 3</th>
-                    <td>3</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 
 </div>

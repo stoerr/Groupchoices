@@ -1,7 +1,12 @@
 Functionality (incl. Scala).
+- validate entries (no empty entries)
 - admin page to delete poll
 - later: extend admin page to change choices
 - page for a vote that can be bookmarked and used to change / delete it
+
+Perhaps Functionality:
+- ??? poll template? or just delete all votes?
+- same width for all columns of voting result?
 
 Misc. Webpages
 - Einstiegsseite an den Anfang stellen, createpoll als separate Seite
@@ -10,3 +15,8 @@ Misc. Webpages
 
 Optional stuff:
 - Use Apache Wicket
+
+
+Some examples:
+http://groupchoices.appspot.com/c/1jkrwkrsqgw
+http://groupchoices.appspot.com/c/1k77m8k5uyo
