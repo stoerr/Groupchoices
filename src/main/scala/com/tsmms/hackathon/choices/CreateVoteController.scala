@@ -25,7 +25,7 @@ class NewVoteController(id: Long)(implicit request: HttpServletRequest) extends 
       addField("choice", choice.name)
       addAttribute("vote", "name", "choice" + idx)
       addAttribute("choicegroup", "id", "choice" + idx)
-      addRepeater("votelabel", (0 until 9) map { rating => () =>
+      addRepeater("votelabel", (0 to 10) map { rating => () =>
         addAttribute("vote", "value", rating.toString)
         addField("rating", rating.toString)
       })
