@@ -3,9 +3,11 @@ Functionality (incl. Scala).
 - admin page to delete poll
 - later: extend admin page to change choices
 - page for a vote that can be bookmarked and used to change / delete it
+- create a new poll based on an existing one (e.g. cloning a poll)
 
 Perhaps Functionality:
-- ??? poll template? or just delete all votes?
+- reset a poll/delete all votes (restricted to admin)
+- store timestamp of creation with every poll to calculate usage statistics
 - same width for all columns of voting result?
 
 Misc. Webpages
