@@ -54,12 +54,12 @@
         You can give several choices the same rating.
     </p>
 
-    <form class="form-horizontal" wicket:id="voteform" method="post">
+    <form class="form-horizontal validation-enabled" wicket:id="voteform" method="post">
         <div class="form-group">
             <label for="inputName" class="col-sm-2 control-label">User Name</label>
 
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputName" placeholder="Name" name="username"/>
+                <input type="text" class="form-control validation-not-empty" id="inputName" placeholder="Name" name="username"/>
             </div>
         </div>
         <div class="panel panel-default">
@@ -121,7 +121,10 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script src="/js/ValidateForms.js"></script>
+
 </body>
 </html>

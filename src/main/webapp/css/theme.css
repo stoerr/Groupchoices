@@ -6,3 +6,7 @@ body {
 form .choicepanel {
     margin-left: 17.1%;
 }
+
+.validation-failed {
+    background-color: #f77;
+}
