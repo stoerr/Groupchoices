@@ -8,7 +8,9 @@ ratings per item, specify a order of preference between them, ...
 
 You can view it, as far as it's done yet, on http://groupchoices.appspot.com/ .
 
-The HTML was done by Stefan Scheidewig, the Scala code by Hans-Peter Störr.
+The HTML and sbt support was done by Stefan Scheidewig, 
+some Javascript Features (Graph, Validation) by Markus Böhme 
+and the Scala code by Hans-Peter Störr http://www.stoerr.net/ .
 
 Terms
 =====

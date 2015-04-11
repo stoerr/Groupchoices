@@ -3,7 +3,7 @@
     <!-- see https://cloud.google.com/appengine/docs/java/config/appconfig -->
 
     <application>groupchoices</application>
-    <version>1</version>
+    <version>2</version>
     <threadsafe>true</threadsafe>
     <sessions-enabled>true</sessions-enabled>
 
