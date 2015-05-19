@@ -48,6 +48,7 @@
     <servlet-mapping>
         <servlet-name>choicedispatcher</servlet-name>
         <url-pattern>/new</url-pattern>
+        <url-pattern>/about</url-pattern>
         <url-pattern>/a/*</url-pattern>
         <url-pattern>/c/*</url-pattern>
     </servlet-mapping>

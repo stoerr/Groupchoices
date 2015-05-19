@@ -1,5 +1,6 @@
 package com.tsmms.hackathon.choices
 
+import java.util.logging.Logger
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 
 import com.tsmms.hackathon.choices.AbstractController._
@@ -10,6 +11,8 @@ import com.tsmms.hackathon.choices.AbstractController._
  */
 class ChoiceDispatcher extends HttpServlet {
 
+  val logger = Logger.getLogger(getClass.getName)
+
   override def doPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
@@ -19,14 +22,18 @@ class ChoiceDispatcher extends HttpServlet {
     }
   }
 
+  // new URL: check web.xml
   override def doGet(request: HttpServletRequest, response: HttpServletResponse): Unit = {
     implicit val implicitRequest = request
     request.getServletPath + Option(request.getPathInfo).getOrElse("") match {
       case "/new" | "" | "/" => showPage("/createpoll.xhtml", request, response)
+      case "/about" => showPage("/about.xhtml", request, response)
       case PollOverviewController.pathRegex(id) => new PollOverviewController(decodeId(id)).process()
         showPage("/polloverview.xhtml", request, response)
       case NewVoteController.pathRegex(id) => new NewVoteController(decodeId(id)).process()
         showPage("/createvote.xhtml", request, response)
+      case other @ _ => logger.warning("Unknown path " + other)
+        showPage("/createpoll.xhtml", request, response)
     }
   }
 

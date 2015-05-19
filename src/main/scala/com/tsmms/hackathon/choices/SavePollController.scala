@@ -1,5 +1,7 @@
 package com.tsmms.hackathon.choices
 
+import java.util.Date
+import java.util.concurrent.TimeUnit
 import javax.servlet.http.HttpServletRequest
 
 import scala.collection.JavaConversions._
@@ -18,8 +20,10 @@ class SavePollController(implicit request: HttpServletRequest) extends AbstractC
 
   val choices = choiceParameters map (name => new Choice(AbstractController.makeRandomEncodedId(), name))
 
+  val expirationDate = new Date(System.currentTimeMillis() + 2629744L * request.getParameter("expirationMonths").toLong)
+
   val poll = Poll(id = None, adminId = Random.nextLong().toString, name = request.getParameter("name"), description =
-    request.getParameter("description"), choices = choices.toList)
+    request.getParameter("description"), choices = choices.toList, expires = expirationDate)
 
   def processPost(): String = {
     val savedPoll = PollDao.saveOrUpdate(poll)

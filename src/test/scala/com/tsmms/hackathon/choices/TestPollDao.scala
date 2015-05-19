@@ -1,5 +1,7 @@
 package com.tsmms.hackathon.choices
 
+import java.util.Date
+
 import com.google.appengine.api.datastore._
 import com.google.appengine.tools.development.testing.{LocalDatastoreServiceTestConfig, LocalServiceTestHelper}
 import com.tsmms.hackathon.choices.PollDao._
@@ -27,7 +29,7 @@ class TestPollDao extends FlatSpec with BeforeAndAfter {
     votes = List(
       Vote(id="id1", username="firstuser", ratings = List(Rating("hu", 7), Rating("ha", 4))),
       Vote(id="id2", username="seconduser", ratings = List(Rating("hu", 2), Rating("ha", 8)))
-    ))
+    ), expires = new Date())
 
   "PollDao" should "save and retrieve DsSaveEntities" in {
 

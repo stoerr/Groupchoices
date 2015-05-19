@@ -92,6 +92,8 @@ Resources
 https://cloud.google.com/appengine/docs/java/datastore/entities
 https://cloud.google.com/appengine/docs/java/tools/localunittesting
 
+http://getbootstrap.com/css/
+
 http://www.scalatest.org/user_guide
 http://doc.scalatest.org/2.2.4/index.html#package
 http://www.scala-lang.org/api/current/index.html

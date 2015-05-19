@@ -7,7 +7,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Poll - Make Vote For Poll "POLLNAME"</title>
+    <title wicket:id="title">Group Choices - Make Vote For Poll</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
@@ -30,13 +30,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Poll</a>
+            <a class="navbar-brand" href="#">Group Choices</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/">Create Poll</a></li>
+                <li><a href="/about">About</a></li>
+                <li class="active"><a href="#">Make Vote</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -46,8 +46,10 @@
 <div class="container">
 
     <div class="page-header">
-        <h1>Make a vote</h1>
+        <h1>Make a vote for "<span wicket:id="name">[POLL NAME]</span>"</h1>
     </div>
+
+    <p wicket:id="description">[The description]</p>
 
     <p>
         Please select a rating for each of the choices. 0 is bad ("I don't like it at all!"), 10 is good ("Perfect!").

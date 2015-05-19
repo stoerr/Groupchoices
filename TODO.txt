@@ -1,5 +1,4 @@
 Functionality (incl. Scala).
-- validate entries (no empty entries)
 - admin page to delete poll
 - later: extend admin page to change choices
 - page for a vote that can be bookmarked and used to change / delete it
@@ -7,12 +6,12 @@ Functionality (incl. Scala).
 
 Perhaps Functionality:
 - reset a poll/delete all votes (restricted to admin)
-- store timestamp of creation with every poll to calculate usage statistics
 - same width for all columns of voting result?
+- Actual expiration of polls - for now we only save the date
+- Example poll
 
 Misc. Webpages
 - Einstiegsseite an den Anfang stellen, createpoll als separate Seite
-- Impressum
 - Design bestehender Seiten aufpeppen
 
 Optional stuff:
@@ -22,3 +21,7 @@ Optional stuff:
 Some examples:
 http://groupchoices.appspot.com/c/1jkrwkrsqgw
 http://groupchoices.appspot.com/c/1k77m8k5uyo
+
+Links:
+http://getbootstrap.com/css/
+It runs on http://localhost:9090/ . Admin interface: http://localhost:9090/_ah/admin/

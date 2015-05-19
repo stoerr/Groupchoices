@@ -23,6 +23,7 @@ class PollOverviewController(id: Long)(implicit request: HttpServletRequest) ext
 
   def process() = {
     addField("name", poll.name)
+    addField("title", "Poll Overview " + poll.name)
     addField("description", poll.description)
     addField("usercount", poll.votes.size.toString)
     addAttribute("voteform", "action", NewVoteController.path(id))
